@@ -23,12 +23,12 @@ function CountdownTimer({ targetDate }: { targetDate: string }) {
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const timer = setInterval(() => {
       setTimeLeft(calculateTimeLeft());
     }, 1000);
 
-    return () => clearTimeout(timer);
-  });
+    return () => clearInterval(timer);
+  }, [targetDate]);
 
   const formatNumber = (num: number) => num.toString().padStart(2, '0');
 

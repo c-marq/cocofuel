@@ -7,11 +7,11 @@ const Solution = () => {
   return (
     <section id="solution" className="relative py-20 px-4 bg-slate-900 overflow-hidden">
       {/* Background Effects */}
-      <div className="absolute inset-0">
-        {/* Floating Brand Color Orbs */}
-        <div className="absolute top-20 left-10 w-64 h-64 bg-gradient-to-r from-mint/30 to-sky/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-r from-coral/20 to-amber/30 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-lavender/10 to-mint/20 rounded-full blur-3xl animate-pulse delay-2000"></div>
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Floating Brand Color Orbs - contained within viewport */}
+        <div className="absolute top-20 left-[5%] w-64 h-64 bg-gradient-to-r from-mint/30 to-sky/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-[5%] w-64 h-64 bg-gradient-to-r from-coral/20 to-amber/30 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-lavender/10 to-mint/20 rounded-full blur-3xl animate-pulse delay-2000"></div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">

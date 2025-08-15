@@ -78,18 +78,19 @@ function TestimonialMarquee() {
   ];
 
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative overflow-hidden w-full">
       <motion.div 
-        className="flex gap-8 whitespace-nowrap"
-        animate={{ x: [0, -1920] }}
+        className="flex gap-8 whitespace-nowrap will-change-transform"
+        animate={{ x: [0, "-50%"] }}
         transition={{ 
           duration: 30,
           repeat: Infinity,
           ease: "linear"
         }}
+        style={{ width: "200%" }}
       >
         {[...testimonials, ...testimonials].map((testimonial, i) => (
-          <div key={i} className="text-gray-300 text-sm italic flex-shrink-0">
+          <div key={i} className="text-gray-300 text-sm italic flex-shrink-0 px-4">
             "{testimonial}"
           </div>
         ))}

@@ -42,7 +42,6 @@ export default function Home(): JSX.Element {
         <CallToAction />
         <UrgencyOffer />
         <FrequentlyAskedQuestions />
-        <UrgencyOffer />
       </main>
       <Footer />
       <ScrollToTop />
