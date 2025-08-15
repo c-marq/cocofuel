@@ -5,7 +5,7 @@ import TextHover from './TextHover';
 
 const Solution = () => {
   return (
-    <section className="relative min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-20 lg:py-32 overflow-hidden">
+    <section id="solution" className="relative py-20 px-4 bg-slate-900 overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0">
         {/* Floating Brand Color Orbs */}

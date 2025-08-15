@@ -181,7 +181,7 @@ export default function FrequentlyAskedQuestions() {
   };
 
   return (
-    <section className="py-16 px-4 bg-slate-900">
+    <section id="faq" className="py-20 px-4 bg-slate-900">
       <div className="max-w-4xl mx-auto">
         {/* Headline */}
         <motion.div 

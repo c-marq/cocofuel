@@ -6,7 +6,6 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import ButtonSignin from "./ButtonSignin";
-import logo from "@/app/icon.png";
 import config from "@/config";
 
 const links: {
@@ -54,13 +53,12 @@ const Header = () => {
             title={`${config.appName} homepage`}
           >
             <Image
-              src={logo}
+              src="/PicsSizer_51x30.png"
               alt={`${config.appName} logo`}
-              className="w-8"
-              placeholder="blur"
+              className="h-8 w-auto"
               priority={true}
-              width={48}
-              height={48}
+              width={51}
+              height={30}
             />
             <span className="font-extrabold text-lg">{config.appName}</span>
           </Link>
@@ -121,13 +119,12 @@ const Header = () => {
               href="/"
             >
               <Image
-                src={logo}
+                src="/PicsSizer_51x30.png"
                 alt={`${config.appName} logo`}
-                className="w-8"
-                placeholder="blur"
+                className="h-8 w-auto"
                 priority={true}
-                width={48}
-                height={48}
+                width={51}
+                height={30}
               />
               <span className="font-extrabold text-lg">{config.appName}</span>
             </Link>

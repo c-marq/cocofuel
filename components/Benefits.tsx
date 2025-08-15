@@ -177,7 +177,7 @@ export default function Benefits() {
   ];
 
   return (
-    <section className="py-16 bg-slate-900">
+    <section id="benefits" className="py-20 px-4 bg-slate-900">
       <div className="container mx-auto px-4 max-w-6xl">
         {/* Section Header */}
         <motion.div 

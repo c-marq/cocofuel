@@ -1,5 +1,5 @@
 import { Suspense, ReactNode } from 'react';
-import Header from "@/components/Header";
+import CocofuelHeader from "@/components/CocofuelHeader";
 import Hero from "@/components/Hero";
 import Problem from "@/components/Problem";
 import Solution from "@/components/Solution";
@@ -28,7 +28,7 @@ export default function Home(): JSX.Element {
   return (
     <>
       <Suspense fallback={<div>Loading...</div>}>
-        <Header />
+        <CocofuelHeader />
       </Suspense>
       <main>
         {/* FeNAgO - The complete platform for building agentic AI-powered SaaS products */}

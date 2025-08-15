@@ -118,7 +118,7 @@ export default function SocialProof() {
   ];
 
   return (
-    <section className="py-16 px-4 bg-slate-900">
+    <section id="social-proof" className="py-20 px-4 bg-slate-900 relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
         {/* Headline */}
         <motion.div 

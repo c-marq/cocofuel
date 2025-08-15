@@ -129,7 +129,7 @@ const ProblemStep = ({ imageUrl, text, description, color, delay = 0 }: {
 // Establishes deep empathy and emotional connection
 const Problem = () => {
   return (
-    <section className="relative bg-gradient-to-br from-slate-900 via-gray-900 to-slate-800 py-20 lg:py-32 overflow-hidden">
+    <section id="problem" className="py-16 px-4 bg-slate-900">
       {/* Brand color accent background */}
       <div className="absolute inset-0 bg-gradient-to-r from-coral/10 via-amber/5 to-mint/10"></div>
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-coral/20 rounded-full blur-3xl"></div>
