@@ -10,6 +10,7 @@ import ProductShowcase from "@/components/ProductShowcase";
 import CallToAction from "@/components/CallToAction";
 import UrgencyOffer from "@/components/UrgencyOffer";
 import FrequentlyAskedQuestions from "@/components/FrequentlyAskedQuestions";
+import ScrollToTop from "@/components/ScrollToTop";
 import Pricing from "@/components/Pricing";
 import Testimonials3 from "@/components/Testimonials3";
 import FAQ from "@/components/FAQ";
@@ -41,8 +42,10 @@ export default function Home(): JSX.Element {
         <CallToAction />
         <UrgencyOffer />
         <FrequentlyAskedQuestions />
+        <UrgencyOffer />
       </main>
       <Footer />
+      <ScrollToTop />
     </>
   );
 }
