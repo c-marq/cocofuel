@@ -3,7 +3,9 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Problem from "@/components/Problem";
 import Solution from "@/components/Solution";
+import Benefits from "@/components/Benefits";
 import FeaturesAccordion from "@/components/FeaturesAccordion";
+import SocialProof from "@/components/SocialProof";
 import Pricing from "@/components/Pricing";
 import Testimonials3 from "@/components/Testimonials3";
 import FAQ from "@/components/FAQ";
@@ -29,6 +31,8 @@ export default function Home(): JSX.Element {
         <Hero />
         <Problem />
         <Solution />
+        <Benefits />
+        <SocialProof />
         <FeaturesAccordion />
         <Pricing />
         <Testimonials3 />
