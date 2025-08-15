@@ -6,6 +6,9 @@ import Solution from "@/components/Solution";
 import Benefits from "@/components/Benefits";
 import FeaturesAccordion from "@/components/FeaturesAccordion";
 import SocialProof from "@/components/SocialProof";
+import ProductShowcase from "@/components/ProductShowcase";
+import CallToAction from "@/components/CallToAction";
+import UrgencyOffer from "@/components/UrgencyOffer";
 import Pricing from "@/components/Pricing";
 import Testimonials3 from "@/components/Testimonials3";
 import FAQ from "@/components/FAQ";
@@ -33,6 +36,9 @@ export default function Home(): JSX.Element {
         <Solution />
         <Benefits />
         <SocialProof />
+        <ProductShowcase />
+        <CallToAction />
+        <UrgencyOffer />
         <FeaturesAccordion />
         <Pricing />
         <Testimonials3 />
