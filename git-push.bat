@@ -29,7 +29,7 @@ echo This makes the remote repository match your local repository exactly.
 set /p confirm="Are you sure you want to force push? (Y/N): "
 if /i "%confirm%"=="Y" (
   echo Pushing to GitHub repository: https://github.com/c-marq/cocofuel
-  "C:\Program Files\Git\bin\git.exe" push -f -u origin main
+  "C:\Program Files\Git\bin\git.exe" push -f -u origin master:main
 ) else (
   echo Force push canceled.
   exit /b 1
