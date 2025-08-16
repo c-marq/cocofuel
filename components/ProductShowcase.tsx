@@ -57,12 +57,21 @@ function HeroVideoDialog() {
       {/* Video Modal */}
       {isOpen && (
         <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={() => setIsOpen(false)}
         >
+          {/* Close button positioned fixed to viewport */}
+          <button
+            onClick={() => setIsOpen(false)}
+            className="fixed top-6 right-6 text-white hover:text-gray-300 transition-colors z-[10001] bg-black/80 hover:bg-black rounded-full p-3 border border-white/20"
+            style={{ zIndex: 10001 }}
+          >
+            <XMarkIcon className="w-6 h-6" />
+          </button>
+          
           <motion.div
             className="relative max-w-4xl w-full mx-4"
             initial={{ scale: 0.8, opacity: 0 }}
@@ -71,12 +80,6 @@ function HeroVideoDialog() {
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
             onClick={(e) => e.stopPropagation()}
           >
-            <button
-              onClick={() => setIsOpen(false)}
-              className="absolute -top-10 right-0 text-white hover:text-gray-300 transition-colors"
-            >
-              <XMarkIcon className="w-8 h-8" />
-            </button>
             
             <div className="aspect-video bg-slate-900 rounded-lg overflow-hidden">
               {/* Placeholder for actual video */}
