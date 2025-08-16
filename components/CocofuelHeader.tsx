@@ -240,9 +240,6 @@ export default function CocofuelHeader() {
                   width={80}
                   height={40}
                 />
-                <span className="text-white font-bold text-xl font-serif">
-                  COCOFUEL
-                </span>
               </Link>
             </motion.div>
 
@@ -306,7 +303,7 @@ export default function CocofuelHeader() {
               <div className="flex flex-col h-full">
                 {/* Mobile Menu Header */}
                 <div className="flex items-center justify-between p-6 border-b border-slate-700">
-                  <div className="flex items-center space-x-3">
+                  <div className="flex items-center">
                     <Image
                       src="/cropped_image_ (1)-Picsart-BackgroundRemover.png"
                       alt="Cocofuel Logo"
@@ -314,9 +311,6 @@ export default function CocofuelHeader() {
                       width={60}
                       height={30}
                     />
-                    <span className="text-white font-bold text-lg font-serif">
-                      COCOFUEL
-                    </span>
                   </div>
                   <motion.button
                     onClick={() => setIsMobileMenuOpen(false)}
