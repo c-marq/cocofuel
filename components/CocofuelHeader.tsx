@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+import ButtonSignin from './ButtonSignin';
 
 interface NavLink {
   href: string;
@@ -257,11 +258,12 @@ export default function CocofuelHeader() {
               ))}
             </div>
 
-            {/* Desktop CTA Button */}
+            {/* Desktop Sign In/Register Button */}
             <div className="hidden lg:flex">
-              <MagneticButton>
-                Fuel Your Day Now!
-              </MagneticButton>
+              <ButtonSignin 
+                text="Sign In" 
+                extraStyle="px-6 py-3 rounded-full bg-gradient-to-r from-coral to-amber text-white font-semibold text-sm shadow-lg border border-coral/20 focus:outline-none focus:ring-4 focus:ring-coral/50 hover:scale-105 transition-all duration-300"
+              />
             </div>
 
             {/* Mobile Menu Button */}
@@ -344,11 +346,12 @@ export default function CocofuelHeader() {
                   </div>
                 </div>
 
-                {/* Mobile CTA Button */}
+                {/* Mobile Sign In/Register Button */}
                 <div className="p-6 border-t border-slate-700">
-                  <MagneticButton className="w-full justify-center">
-                    Fuel Your Day Now!
-                  </MagneticButton>
+                  <ButtonSignin 
+                    text="Sign In" 
+                    extraStyle="w-full px-6 py-3 rounded-full bg-gradient-to-r from-coral to-amber text-white font-semibold text-sm shadow-lg border border-coral/20 focus:outline-none focus:ring-4 focus:ring-coral/50 hover:scale-105 transition-all duration-300 justify-center"
+                  />
                 </div>
               </div>
             </motion.div>

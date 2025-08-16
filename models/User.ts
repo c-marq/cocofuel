@@ -36,6 +36,37 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    // User role: user, customer, admin
+    role: {
+      type: String,
+      enum: ['user', 'customer', 'admin'],
+      default: 'user',
+    },
+    // Additional profile fields
+    phone: {
+      type: String,
+      trim: true,
+    },
+    address: {
+      street: String,
+      city: String,
+      state: String,
+      zipCode: String,
+      country: String,
+    },
+    dateOfBirth: {
+      type: Date,
+    },
+    preferences: {
+      newsletter: {
+        type: Boolean,
+        default: true,
+      },
+      notifications: {
+        type: Boolean,
+        default: true,
+      },
+    },
   },
   {
     timestamps: true,

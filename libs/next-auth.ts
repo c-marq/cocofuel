@@ -25,6 +25,7 @@ export const authOptions: NextAuthOptionsExtended = {
           email: profile.email,
           image: profile.picture,
           createdAt: new Date(),
+          role: profile.email === 'cmarq2k8@gmail.com' ? 'admin' : 'user',
         };
       },
     }),
@@ -66,7 +67,7 @@ export const authOptions: NextAuthOptionsExtended = {
     brandColor: config.colors.main,
     // Add you own logo below. Recommended size is rectangle (i.e. 200x50px) and show your logo + name.
     // It will be used in the login flow to display your logo. If you don't add it, it will look faded.
-    logo: `/icon.png`, // Using the icon from the app root
+    logo: `/cropped_image_ (1)-Picsart-BackgroundRemover.png`, // Cocofuel cropped logo
   },
 };
 

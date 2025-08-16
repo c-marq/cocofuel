@@ -34,7 +34,7 @@ const Hero = () => {
               transition={{ duration: 1, delay: 0.5 }}
             >
               <TextHover
-                text="Tired of Feeling Drained? Reclaim Your Vibrant Energy."
+                text="Feeling Drained and Dehydrated? Reclaim Your Optimal Balance."
                 className="font-secondary font-bold text-4xl lg:text-6xl text-white leading-tight drop-shadow-2xl"
                 hoverColors={["text-coral", "text-amber", "text-mint", "text-sky", "text-lavender"]}
                 splitType="words"
@@ -49,7 +49,7 @@ const Hero = () => {
               className="font-primary text-lg lg:text-xl leading-relaxed max-w-2xl"
             >
               <TextHover
-                text="REFRESH your energy. REHYDRATE your body. REPEAT your success."
+                text="Cocofuel is the natural, delicious way to rehydrate, replenish essential electrolytes, and recover faster. Say goodbye to dehydration and hello to your most vibrant, balanced self."
                 className="text-white drop-shadow-xl"
                 hoverColors={["text-mint", "text-sky", "text-amber"]}
                 splitType="words"
@@ -61,7 +61,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 2 }}
-              className="px-8 py-4 rounded-full bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-600 hover:via-teal-600 hover:to-cyan-600 text-white font-primary font-semibold text-lg shadow-xl focus:outline-none focus:ring-4 focus:ring-teal-400/50"
+              className="px-8 py-4 rounded-full bg-gradient-to-r from-[#80DEEA] to-[#FF8A65] hover:from-[#4DD0E1] hover:to-[#FF7043] text-white font-primary font-semibold text-lg shadow-xl focus:outline-none focus:ring-4 focus:ring-[#80DEEA]/50"
               whileHover={{ 
                 scale: 1.05, 
                 boxShadow: "0 20px 40px rgba(0,0,0,0.3)",
@@ -70,27 +70,27 @@ const Hero = () => {
               }}
               whileTap={{ scale: 0.98 }}
             >
-              Fuel Your Day Now!
+              Rehydrate Now!
             </motion.button>
             
-            {/* Energy indicators/benefits */}
+            {/* Hydration benefits indicators */}
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 2.5 }}
-              className="flex flex-wrap gap-4 text-white text-sm font-primary drop-shadow-lg"
+              className="flex flex-wrap gap-4 text-white text-sm font-primary drop-shadow-lg justify-center"
             >
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-mint rounded-full animate-pulse"></div>
-                <span>Natural Ingredients</span>
+                <div className="w-2 h-2 bg-[#A5D6A7] rounded-full animate-pulse"></div>
+                <span>Natural Coconut Water</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-sky rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
-                <span>Sustained Energy</span>
+                <div className="w-2 h-2 bg-[#80DEEA] rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+                <span>Essential Electrolytes</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-lavender rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
-                <span>Enhanced Performance</span>
+                <div className="w-2 h-2 bg-[#FFCC80] rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
+                <span>Faster Recovery</span>
               </div>
             </motion.div>
           </div>
