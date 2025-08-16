@@ -1,7 +1,8 @@
 "use client";
 
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import ContactForm from "./ContactForm";
 
 // Custom Chevron Icon
 function ChevronDownIcon({ className }: { className: string }) {
@@ -24,8 +25,14 @@ function FAQItem({ question, answer, isOpen, onToggle }: FAQItemProps) {
   return (
     <div className="border-b border-slate-700">
       <button
-        onClick={onToggle}
-        className="flex justify-between items-center w-full py-6 text-left focus:outline-none focus:ring-2 focus:ring-coral/50 rounded-lg px-2"
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          console.log('FAQ button clicked:', question);
+          onToggle();
+        }}
+        className="flex justify-between items-center w-full py-6 text-left focus:outline-none focus:ring-2 focus:ring-coral/50 rounded-lg px-2 hover:bg-slate-700/50 cursor-pointer transition-colors duration-300"
+        style={{ zIndex: 10, position: 'relative' }}
       >
         <h3 className="text-lg font-semibold text-white pr-4">{question}</h3>
         <motion.div
@@ -70,6 +77,7 @@ function TerminalFAQ() {
   ];
 
   const startTerminalDemo = () => {
+    console.log('Starting terminal demo...');
     setCurrentStep(0);
     setIsTyping(true);
     
@@ -125,8 +133,14 @@ function TerminalFAQ() {
         
         {!isTyping && currentStep === 0 && (
           <button
-            onClick={startTerminalDemo}
-            className="mt-4 text-mint hover:text-sky transition-colors duration-300"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              console.log('Terminal demo button clicked');
+              startTerminalDemo();
+            }}
+            className="mt-4 text-mint hover:text-sky transition-colors duration-300 cursor-pointer bg-transparent border-none underline"
+            style={{ zIndex: 10, position: 'relative' }}
           >
             → Click to start FAQ demo
           </button>
@@ -134,8 +148,14 @@ function TerminalFAQ() {
         
         {!isTyping && currentStep > 0 && (
           <button
-            onClick={startTerminalDemo}
-            className="mt-4 text-mint hover:text-sky transition-colors duration-300"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              console.log('Terminal replay button clicked');
+              startTerminalDemo();
+            }}
+            className="mt-4 text-mint hover:text-sky transition-colors duration-300 cursor-pointer bg-transparent border-none underline"
+            style={{ zIndex: 10, position: 'relative' }}
           >
             → Replay demo
           </button>
@@ -148,6 +168,13 @@ function TerminalFAQ() {
 // Main FAQ Component
 export default function FrequentlyAskedQuestions() {
   const [openItem, setOpenItem] = useState<number | null>(null);
+  const [contactForm, setContactForm] = useState<{
+    isOpen: boolean;
+    formType: 'contact' | 'support';
+  }>({
+    isOpen: false,
+    formType: 'support'
+  });
 
   const faqs = [
     {
@@ -177,6 +204,7 @@ export default function FrequentlyAskedQuestions() {
   ];
 
   const toggleItem = (index: number) => {
+    console.log('Toggling FAQ item:', index, 'Current open:', openItem);
     setOpenItem(openItem === index ? null : index);
   };
 
@@ -237,21 +265,46 @@ export default function FrequentlyAskedQuestions() {
             
             {/* Contact CTA */}
             <motion.div 
-              className="mt-8 p-6 bg-gradient-to-r from-coral/10 to-sky/10 border border-coral/20 rounded-xl"
-              whileHover={{ scale: 1.02 }}
+              className="mt-8 p-6 bg-gradient-to-r from-coral/10 to-sky/10 border border-coral/20 rounded-xl relative z-10"
+              whileHover={{ 
+                backgroundImage: "linear-gradient(to right, rgb(255 107 107 / 0.15), rgb(107 153 255 / 0.15))",
+                borderColor: "rgb(255 107 107 / 0.3)"
+              }}
               transition={{ duration: 0.3 }}
             >
               <h4 className="text-white font-semibold text-lg mb-2">Still have questions?</h4>
               <p className="text-gray-300 text-sm mb-4">
                 Our support team is here to help you make the best choice for your hydration needs.
               </p>
-              <button className="bg-coral hover:bg-coral/80 text-white px-6 py-2 rounded-full font-semibold transition-colors duration-300">
+              <button 
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  console.log('FAQ Contact Support button clicked - before state update');
+                  setContactForm({
+                    isOpen: true,
+                    formType: 'support'
+                  });
+                  console.log('FAQ Contact Support button clicked - after state update');
+                }}
+                className="bg-coral hover:bg-coral/80 text-white px-6 py-2 rounded-full font-semibold transition-colors duration-300 cursor-pointer relative z-10"
+              >
                 Contact Support
               </button>
             </motion.div>
           </motion.div>
         </div>
       </div>
+
+      {/* Contact Form Modal */}
+      <ContactForm
+        isOpen={contactForm.isOpen}
+        onClose={() => {
+          console.log('FAQ modal onClose called');
+          setContactForm({ ...contactForm, isOpen: false });
+        }}
+        formType={contactForm.formType}
+      />
     </section>
   );
 }

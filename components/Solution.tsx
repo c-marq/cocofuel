@@ -14,14 +14,15 @@ const Solution = () => {
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-lavender/10 to-mint/20 rounded-full blur-3xl animate-pulse delay-2000"></div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden" style={{maxWidth: "100vw"}}>
         {/* Section Header */}
         <motion.div 
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="text-center mb-16 lg:mb-24"
+          className="text-center mb-16 lg:mb-24 w-full overflow-hidden"
+          style={{maxWidth: "100%", wordWrap: "break-word"}}
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -38,7 +39,7 @@ const Solution = () => {
           {/* Main Headline with TextHover */}
           <TextHover
             text="Cocofuel: Reclaim Your Vibrant Energy, Naturally."
-            className="font-secondary font-bold text-4xl lg:text-6xl xl:text-7xl text-white leading-tight max-w-5xl mx-auto mb-8"
+            className="font-secondary font-bold text-3xl sm:text-4xl lg:text-5xl xl:text-6xl text-white leading-tight max-w-4xl mx-auto mb-8"
             hoverColors={["text-mint", "text-coral", "text-sky", "text-amber"]}
             splitType="words"
           />
@@ -46,7 +47,7 @@ const Solution = () => {
           {/* Subtext with TextHover */}
           <TextHover
             text="Imagine a life where fatigue is a distant memory, and every workout leaves you feeling strong, not drained. Cocofuel is more than just hydration; it's a catalyst for your personal evolution. Our pure, natural formula provides sustained energy and clarity, empowering you to thrive in every aspect of your life. It's time to banish the self-doubt and embrace the vibrant, unstoppable you."
-            className="font-primary text-lg lg:text-xl text-gray-300 leading-relaxed max-w-4xl mx-auto"
+            className="font-primary text-base sm:text-lg lg:text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto px-4"
             hoverColors={["text-white", "text-mint", "text-sky"]}
             splitType="words"
           />

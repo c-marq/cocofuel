@@ -3,10 +3,10 @@ import { ConfigProps } from "./types/config";
 
 const config = {
   // REQUIRED
-  appName: "FeNAgO",
+  appName: "Cocofuel - Natural Hydration & Energy",
   // REQUIRED: a short description of your app for SEO tags (can be overwritten)
   appDescription:
-    "The NextJS boilerplate with all you need to build your SaaS, AI tool, or any other web app.",
+    "Discover Cocofuel's natural coconut water formula for sustained energy, optimal hydration, and enhanced performance without artificial ingredients.",
   // REQUIRED (no https://, not trailing slash at the end, just the naked domain)
   domainName: "fenago.com",
   crisp: {

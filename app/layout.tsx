@@ -24,6 +24,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 			data-theme={config.colors.theme}
 			className={`${inter.variable} ${dmSerifDisplay.variable}`}
 		>
+			<head>
+				<link rel="icon" href="/favicon-32x32.png" sizes="32x32" />
+				<link rel="icon" href="/favicon-32x32.png" sizes="16x16" />
+				<link rel="apple-touch-icon" href="/favicon-32x32.png" />
+			</head>
 			<body>
 				{/* ClientLayout contains all the client wrappers (Crisp chat support, toast messages, tooltips, etc.) */}
 				<ClientLayout>{children}</ClientLayout>

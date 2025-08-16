@@ -62,8 +62,13 @@ const ContactForm = ({ isOpen, onClose, formType }: ContactFormProps) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
-            onClick={onClose}
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[9999]"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              console.log('Backdrop clicked, closing modal');
+              onClose();
+            }}
           />
 
           {/* Modal */}
@@ -72,9 +77,11 @@ const ContactForm = ({ isOpen, onClose, formType }: ContactFormProps) => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: "spring", duration: 0.3 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6 pointer-events-none"
           >
-            <div className="relative w-full max-w-md bg-slate-900 rounded-2xl border border-slate-700/50 shadow-2xl overflow-hidden">
+            <div className="relative w-full max-w-xs sm:max-w-sm lg:max-w-md mx-auto bg-slate-900 rounded-2xl border border-slate-700/50 shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto pointer-events-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
               {/* Background Effects */}
               <div className="absolute inset-0">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-coral/20 to-amber/10 rounded-full blur-2xl"></div>
@@ -93,8 +100,14 @@ const ContactForm = ({ isOpen, onClose, formType }: ContactFormProps) => {
                     </p>
                   </div>
                   <button
-                    onClick={onClose}
-                    className="p-2 text-gray-400 hover:text-white transition-colors duration-200 rounded-lg hover:bg-slate-800"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      console.log('X button clicked, closing modal');
+                      onClose();
+                    }}
+                    className="p-2 text-gray-400 hover:text-white transition-colors duration-200 rounded-lg hover:bg-slate-800 z-[10000] relative"
+                    style={{ zIndex: 10000 }}
                   >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />

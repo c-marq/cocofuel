@@ -129,13 +129,13 @@ const ProblemStep = ({ imageUrl, text, description, color, delay = 0 }: {
 // Establishes deep empathy and emotional connection
 const Problem = () => {
   return (
-    <section id="problem" className="py-16 px-4 bg-slate-900">
+    <section id="problem" className="py-16 px-4 bg-slate-900 overflow-hidden">
       {/* Brand color accent background */}
       <div className="absolute inset-0 bg-gradient-to-r from-coral/10 via-amber/5 to-mint/10"></div>
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-coral/20 rounded-full blur-3xl"></div>
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-sky/20 rounded-full blur-3xl"></div>
       
-      <div className="relative z-10 max-w-6xl mx-auto px-8 text-center">
+      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center overflow-hidden" style={{maxWidth: "100vw"}}>
         {/* Headline with TextHover effect */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -146,7 +146,7 @@ const Problem = () => {
         >
           <TextHover
             text="The Daily Drain: Why You're Feeling Less Than Your Best"
-            className="font-secondary font-bold text-3xl lg:text-5xl text-white leading-tight max-w-4xl mx-auto"
+            className="font-secondary font-bold text-2xl sm:text-3xl lg:text-4xl xl:text-5xl text-white leading-tight max-w-3xl mx-auto"
             hoverColors={["text-coral", "text-amber", "text-mint"]}
             splitType="words"
           />
@@ -162,7 +162,7 @@ const Problem = () => {
         >
           <TextHover
             text="You wake up with ambition, but by midday, a familiar fatigue sets in. Your workouts leave you more depleted than empowered. You've tried everything, but sugary drinks and artificial solutions only add to your frustration. That constant whisper of 'not enough' is eroding your ambition, leaving you wondering: Am I truly living up to my potential?"
-            className="font-primary text-lg lg:text-xl text-gray-300 leading-relaxed max-w-4xl mx-auto"
+            className="font-primary text-base sm:text-lg lg:text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto px-4"
             hoverColors={["text-white", "text-coral", "text-amber"]}
             splitType="words"
           />

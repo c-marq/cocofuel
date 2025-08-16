@@ -5,7 +5,7 @@
 html,
 body {
   scroll-behavior: smooth !important;
-  overflow-x: hidden;
+  overflow-x: hidden !important;
   width: 100%;
   max-width: 100vw;
 }
@@ -17,13 +17,22 @@ body {
 /* Prevent horizontal scrolling and layout shifts */
 body {
   position: relative;
+  overflow-x: hidden !important;
 }
 
 /* Ensure all containers respect viewport width */
 .container, 
 [class*="max-w-"] {
-  max-width: 100vw;
-  overflow-x: hidden;
+  max-width: 100vw !important;
+  overflow-x: hidden !important;
+}
+
+/* Force text wrapping and prevent overflow */
+p, h1, h2, h3, h4, h5, h6, span, div {
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  hyphens: auto !important;
+  max-width: 100% !important;
 }
 
 /* It makes the HTML progress bar filling smooth when value change. */
