@@ -73,11 +73,11 @@ const config = {
   },
   resend: {
     // REQUIRED — Email 'From' field to be used when sending magic login links
-    fromNoReply: `FeNAgO <noreply@resend.fenago.com>`,
+    fromNoReply: `Cocofuel <noreply@cocofuel.net>`,
     // REQUIRED — Email 'From' field to be used when sending other emails, like abandoned carts, updates etc..
-    fromAdmin: `Dr Lee at FeNAgO <drlee@resend.fenago.com>`,
+    fromAdmin: `Cocofuel Support <support@cocofuel.net>`,
     // Email shown to customer if they need support. Leave empty if not needed => if empty, set up Crisp above, otherwise you won't be able to offer customer support."
-    supportEmail: "socrates.73@gmail.com",
+    supportEmail: "support@cocofuel.net",
   },
   colors: {
     // REQUIRED — The DaisyUI theme to use (added to the main layout.js). Leave blank for default (light & dark mode). If you use any theme other than light/dark, you need to add it in config.tailwind.js in daisyui.themes.

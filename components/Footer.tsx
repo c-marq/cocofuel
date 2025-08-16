@@ -291,13 +291,13 @@ const CocofuelFooter = () => {
             </h3>
             <div className="space-y-3">
               <FooterLink 
-                href="/tos" 
-                label="Terms of Use" 
+                href="/privacy-policy" 
+                label="Privacy Policy" 
                 delay={0.1}
               />
               <FooterLink 
-                href="/privacy-policy" 
-                label="Privacy Policy" 
+                href="/terms-of-use" 
+                label="Terms of Use" 
                 delay={0.2}
               />
             </div>
