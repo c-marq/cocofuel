@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
@@ -16,6 +16,21 @@ import apiClient from "@/libs/api";
 const ButtonAccount = () => {
   const { data: session, status } = useSession();
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
+
+  useEffect(() => {
+    const checkAdminStatus = async () => {
+      if (session?.user?.email) {
+        try {
+          const response = await fetch('/api/admin/stats');
+          setIsAdmin(response.ok);
+        } catch (error) {
+          setIsAdmin(false);
+        }
+      }
+    };
+    checkAdminStatus();
+  }, [session]);
 
   const handleSignOut = () => {
     signOut({ callbackUrl: "/" });
@@ -113,6 +128,26 @@ const ButtonAccount = () => {
                     </svg>
                     Profile
                   </Link>
+                  {isAdmin && (
+                    <Link
+                      href="/admin"
+                      className="flex items-center gap-2 hover:bg-base-300 duration-200 py-1.5 px-4 w-full rounded-lg font-medium"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        className="w-5 h-5"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M18 8a6 6 0 01-7.743 5.743L10 14l-2.257-.257A6 6 0 1118 8zm-1.148 3.148a2 2 0 10-2.828-2.828 2 2 0 002.828 2.828zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                      Admin Panel
+                    </Link>
+                  )}
                   <button
                     className="flex items-center gap-2 hover:bg-base-300 duration-200 py-1.5 px-4 w-full rounded-lg font-medium"
                     onClick={handleBilling}
