@@ -1,219 +1,304 @@
 "use client";
 
 import { motion } from "framer-motion";
-import TextHover from "./TextHover";
 
-// Animated Icon Component for Problem Points
-const AnimatedIcon = ({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20, scale: 0.8 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 0.6, delay, type: "spring", stiffness: 200 }}
-      viewport={{ once: true }}
-      className="text-6xl mb-4"
-    >
-      {children}
-    </motion.div>
-  );
-};
-
-// Arrow component for flow visualization
-const FlowArrow = ({ extraStyle }: { extraStyle: string }) => {
-  return (
-    <motion.svg
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 0.7 }}
-      transition={{ duration: 0.8, delay: 0.5 }}
-      viewport={{ once: true }}
-      className={`shrink-0 w-12 fill-red-400 ${extraStyle}`}
-      viewBox="0 0 138 138"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <g>
-        <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M72.9644 5.31431C98.8774 43.8211 83.3812 88.048 54.9567 120.735C54.4696 121.298 54.5274 122.151 55.0896 122.639C55.6518 123.126 56.5051 123.068 56.9922 122.506C86.2147 88.9044 101.84 43.3918 75.2003 3.80657C74.7866 3.18904 73.9486 3.02602 73.3287 3.44222C72.7113 3.85613 72.5484 4.69426 72.9644 5.31431Z"
-        />
-        <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M56.5084 121.007C56.9835 118.685 57.6119 115.777 57.6736 115.445C59.3456 106.446 59.5323 97.67 58.4433 88.5628C58.3558 87.8236 57.6824 87.2948 56.9433 87.3824C56.2042 87.4699 55.6756 88.1435 55.7631 88.8828C56.8219 97.7138 56.6432 106.225 55.0203 114.954C54.926 115.463 53.5093 121.999 53.3221 123.342C53.2427 123.893 53.3688 124.229 53.4061 124.305C53.5887 124.719 53.8782 124.911 54.1287 125.015C54.4123 125.13 54.9267 125.205 55.5376 124.926C56.1758 124.631 57.3434 123.699 57.6571 123.487C62.3995 120.309 67.4155 116.348 72.791 113.634C77.9171 111.045 83.3769 109.588 89.255 111.269C89.9704 111.475 90.7181 111.057 90.9235 110.342C91.1288 109.626 90.7117 108.878 89.9963 108.673C83.424 106.794 77.3049 108.33 71.5763 111.223C66.2328 113.922 61.2322 117.814 56.5084 121.007Z"
-        />
-      </g>
-    </motion.svg>
-  );
-};
-const ProblemStep = ({ imageUrl, text, description, color, delay = 0 }: { 
-  imageUrl: string;
-  text: string; 
+// Pain Point Component for Problem Validation
+const PainPoint = ({ 
+  icon, 
+  title, 
+  description, 
+  delay = 0 
+}: { 
+  icon: React.ReactNode;
+  title: string;
   description: string;
-  color: 'coral' | 'amber' | 'sky';
   delay?: number;
 }) => {
-  const colorVariants = {
-    coral: {
-      bg: 'from-coral/20 to-coral/5',
-      border: 'border-coral/30',
-      text: 'text-coral',
-      glow: 'shadow-coral/20'
-    },
-    amber: {
-      bg: 'from-amber/20 to-amber/5',
-      border: 'border-amber/30', 
-      text: 'text-amber',
-      glow: 'shadow-amber/20'
-    },
-    sky: {
-      bg: 'from-sky/20 to-sky/5',
-      border: 'border-sky/30',
-      text: 'text-sky', 
-      glow: 'shadow-sky/20'
-    }
-  };
-
-  const variant = colorVariants[color];
-
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay, type: "spring" }}
+    <motion.div
+      initial={{ opacity: 0, y: 30, rotateX: -15 }}
+      whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+      transition={{ duration: 0.8, delay, type: "spring", stiffness: 100 }}
       viewport={{ once: true }}
-      className="w-full md:w-80 flex flex-col gap-6 items-center justify-center text-center group"
+      whileHover={{ 
+        y: -8, 
+        scale: 1.02,
+        boxShadow: "0 20px 40px rgba(0, 191, 165, 0.15)"
+      }}
+      className="flex items-start space-x-4 p-8 bg-gradient-to-br from-white via-[#F0FDFA] to-[#ECFDF5] rounded-2xl shadow-lg border border-[#14B8A6]/10 hover:border-[#14B8A6]/30 transition-all duration-500 group cursor-pointer relative overflow-hidden"
     >
+      {/* Floating background elements */}
+      <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-[#06B6D4]/10 to-[#F97316]/10 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
+      <div className="absolute -bottom-2 -left-2 w-16 h-16 bg-gradient-to-br from-[#10B981]/10 to-[#F59E0B]/10 rounded-full blur-lg group-hover:scale-125 transition-transform duration-500"></div>
+      
       <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.6, delay: delay + 0.2, type: "spring", stiffness: 200 }}
+        initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
+        whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+        transition={{ duration: 0.6, delay: delay + 0.2, type: "spring" }}
         viewport={{ once: true }}
-        className={`relative w-40 h-40 rounded-3xl overflow-hidden border-2 ${variant.border} shadow-2xl ${variant.glow} group-hover:shadow-3xl transition-all duration-500 group-hover:scale-105`}
+        whileHover={{ 
+          scale: 1.15, 
+          rotate: [0, -5, 5, 0],
+          boxShadow: "0 0 20px rgba(20, 184, 166, 0.4)"
+        }}
+        className="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-[#14B8A6] via-[#06B6D4] to-[#0EA5E9] flex items-center justify-center text-white shadow-lg relative z-10 group-hover:shadow-xl transition-all duration-300"
       >
-        <div className={`absolute inset-0 bg-gradient-to-br ${variant.bg} z-10`}></div>
-        <img 
-          src={imageUrl}
-          alt={text}
-          className="w-full h-full object-cover object-center filter saturate-50 group-hover:saturate-100 transition-all duration-500"
+        <motion.div
+          animate={{ 
+            scale: [1, 1.1, 1],
+          }}
+          transition={{ 
+            duration: 2, 
+            repeat: Infinity, 
+            ease: "easeInOut" 
+          }}
+        >
+          {icon}
+        </motion.div>
+        
+        {/* Glow effect */}
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-br from-[#14B8A6] to-[#06B6D4] rounded-xl opacity-0 group-hover:opacity-30 blur-md"
+          animate={{ 
+            scale: [1, 1.2, 1],
+            opacity: [0, 0.3, 0]
+          }}
+          transition={{ 
+            duration: 2.5, 
+            repeat: Infinity, 
+            ease: "easeInOut" 
+          }}
         />
       </motion.div>
       
-      <div className="space-y-2">
-        <motion.h3 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+      <div className="flex-1 relative z-10">
+        <motion.h3
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: delay + 0.3 }}
+          viewport={{ once: true }}
+          className="font-bold text-xl text-[#134E4A] mb-3 font-secondary group-hover:text-[#0F766E] transition-colors duration-300"
+        >
+          {title}
+        </motion.h3>
+        <motion.p
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: delay + 0.4 }}
           viewport={{ once: true }}
-          className={`font-secondary font-bold text-xl ${variant.text} leading-tight`}
-        >
-          {text}
-        </motion.h3>
-        
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: delay + 0.6 }}
-          viewport={{ once: true }}
-          className="font-primary text-sm text-gray-400 leading-relaxed max-w-64"
+          className="text-[#134E4A]/80 leading-relaxed font-primary text-base group-hover:text-[#134E4A] transition-colors duration-300"
         >
           {description}
         </motion.p>
       </div>
+      
+      {/* Subtle wave animation */}
+      <motion.div
+        className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#14B8A6] via-[#06B6D4] to-[#10B981] opacity-20"
+        animate={{ 
+          scaleX: [0, 1, 0],
+          originX: [0, 0.5, 1]
+        }}
+        transition={{ 
+          duration: 3, 
+          repeat: Infinity, 
+          ease: "easeInOut" 
+        }}
+      />
     </motion.div>
   );
 };
-
-// The Daily Drain: Problem Agitation Section
-// Validates Emily's struggles without mentioning Cocofuel
-// Establishes deep empathy and emotional connection
+// Problem validation section following B2C requirements
+// Light theme with empathetic messaging and clean design
 const Problem = () => {
+  const painPoints = [
+    {
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+        </svg>
+      ),
+      title: "Feeling Constantly Parched",
+      description: "No matter how much water you drink, you never feel truly hydrated, leaving you depleted and struggling to maintain your energy throughout the day."
+    },
+    {
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+      ),
+      title: "Poor Recovery After Workouts",
+      description: "Your body takes too long to bounce back, with muscle fatigue and soreness that lingers, preventing you from performing at your best and enjoying the activities you love."
+    },
+    {
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+        </svg>
+      ),
+      title: "Mental Fogginess",
+      description: "Dehydration affects your clarity and focus, making it harder to concentrate during important moments and leaving you feeling less sharp than you know you can be."
+    },
+    {
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      ),
+      title: "Ineffective Hydration Solutions",
+      description: "The market is flooded with products that either taste terrible, contain artificial ingredients you don't want, or simply don't provide the comprehensive rehydration your active lifestyle demands."
+    }
+  ];
+
   return (
-    <section id="problem" className="py-16 px-4 bg-slate-900 overflow-hidden">
-      {/* Brand color accent background */}
-      <div className="absolute inset-0 bg-gradient-to-r from-coral/10 via-amber/5 to-mint/10"></div>
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-coral/20 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-sky/20 rounded-full blur-3xl"></div>
+    <section id="problem" className="py-20 px-4 relative overflow-hidden bg-gradient-to-br from-[#F0FDFA] via-[#ECFDF5] to-[#F0F9FF]">
+      {/* Tropical island-inspired background elements */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#A7F3D0]/20 via-transparent to-[#BFDBFE]/15"></div>
       
-      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center overflow-hidden" style={{maxWidth: "100vw"}}>
-        {/* Headline with TextHover effect */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="mb-8"
-        >
-          <TextHover
-            text="The Daily Drain: Why You're Feeling Less Than Your Best"
-            className="font-secondary font-bold text-2xl sm:text-3xl lg:text-4xl xl:text-5xl text-white leading-tight max-w-3xl mx-auto"
-            hoverColors={["text-coral", "text-amber", "text-mint"]}
-            splitType="words"
-          />
-        </motion.div>
-
-        {/* Subtext with emotional resonance */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          viewport={{ once: true }}
-          className="mb-16"
-        >
-          <TextHover
-            text="You wake up with ambition, but by midday, a familiar fatigue sets in. Your workouts leave you more depleted than empowered. You've tried everything, but sugary drinks and artificial solutions only add to your frustration. That constant whisper of 'not enough' is eroding your ambition, leaving you wondering: Am I truly living up to my potential?"
-            className="font-primary text-base sm:text-lg lg:text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto px-4"
-            hoverColors={["text-white", "text-coral", "text-amber"]}
-            splitType="words"
-          />
-        </motion.div>
-
-        {/* Visual Problem Flow with Brand Colors */}
-        <div className="flex flex-col lg:flex-row justify-center items-center lg:items-start gap-12 lg:gap-16">
-          <ProblemStep 
-            imageUrl="https://images.unsplash.com/photo-1573497622711-5bd615bc70ae?q=80&w=707&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-            text="Morning Ambition Fades" 
-            description="Starting strong but losing steam by 10am"
-            color="coral"
-            delay={0.1}
-          />
-
-          <motion.div 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
+      {/* Floating organic shapes */}
+      <motion.div 
+        animate={{ 
+          y: [-20, 20, -20],
+          rotate: [0, 5, 0],
+          scale: [1, 1.1, 1]
+        }}
+        transition={{ 
+          duration: 8, 
+          repeat: Infinity, 
+          ease: "easeInOut" 
+        }}
+        className="absolute top-10 right-10 w-80 h-80 bg-gradient-to-br from-[#14B8A6]/15 to-[#06B6D4]/10 rounded-full blur-3xl"
+      />
+      
+      <motion.div 
+        animate={{ 
+          y: [20, -20, 20],
+          rotate: [0, -3, 0],
+          scale: [1.1, 1, 1.1]
+        }}
+        transition={{ 
+          duration: 10, 
+          repeat: Infinity, 
+          ease: "easeInOut",
+          delay: 2
+        }}
+        className="absolute bottom-10 left-10 w-96 h-96 bg-gradient-to-br from-[#10B981]/10 to-[#F59E0B]/5 rounded-full blur-3xl"
+      />
+      
+      <motion.div 
+        animate={{ 
+          x: [-30, 30, -30],
+          y: [10, -10, 10]
+        }}
+        transition={{ 
+          duration: 12, 
+          repeat: Infinity, 
+          ease: "easeInOut",
+          delay: 4
+        }}
+        className="absolute top-1/2 left-1/2 w-64 h-64 bg-gradient-to-br from-[#0EA5E9]/8 to-[#84CC16]/5 rounded-full blur-2xl transform -translate-x-1/2 -translate-y-1/2"
+      />
+      
+      {/* Subtle wave patterns */}
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#14B8A6]/5 to-transparent"></div>
+      
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header Section */}
+        <div className="text-center mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 30, scale: 0.95 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
             viewport={{ once: true }}
-            className="hidden lg:flex items-center justify-center"
+            className="text-xl text-[#134E4A] font-primary leading-relaxed max-w-4xl mx-auto mb-10 relative"
           >
-            <div className="w-16 h-0.5 bg-gradient-to-r from-coral to-amber"></div>
+            <p className="relative z-10">
+              We know you're here because you're tired of feeling drained, dehydrated, and struggling with inadequate recovery. You've tried the sugary sports drinks, the artificial electrolyte tablets, and nothing truly delivers the deep rehydration your body craves. You're not alone in this frustration.
+            </p>
+            {/* Subtle highlight effect */}
+            <motion.div
+              initial={{ scaleX: 0, opacity: 0 }}
+              whileInView={{ scaleX: 1, opacity: 0.1 }}
+              transition={{ duration: 1.2, delay: 0.5 }}
+              viewport={{ once: true }}
+              className="absolute inset-0 bg-gradient-to-r from-[#14B8A6] to-[#06B6D4] rounded-lg -z-10"
+            />
           </motion.div>
-
-          <ProblemStep 
-            imageUrl="https://images.unsplash.com/photo-1713947503867-3b27964f042b?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-            text="Midday Energy Crash" 
-            description="That 2pm wall hits harder than expected"
-            color="amber"
-            delay={0.3}
-          />
-
-          <motion.div 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
+          
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3, type: "spring" }}
             viewport={{ once: true }}
-            className="hidden lg:flex items-center justify-center"
+            className="text-3xl md:text-4xl font-bold text-[#0F766E] font-secondary mb-12 relative"
           >
-            <div className="w-16 h-0.5 bg-gradient-to-r from-amber to-sky"></div>
-          </motion.div>
-
-          <ProblemStep 
-            imageUrl="https://images.unsplash.com/photo-1612469293045-749ac41b70a0?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-            text="Self-Doubt Creeps In" 
-            description="'Am I not cut out for this?' whispers grow louder"
-            color="sky"
-            delay={0.5}
-          />
+            <motion.span
+              animate={{ 
+                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
+              }}
+              transition={{ 
+                duration: 4, 
+                repeat: Infinity, 
+                ease: "easeInOut" 
+              }}
+              style={{
+                background: "linear-gradient(45deg, #14B8A6, #06B6D4, #10B981, #14B8A6)",
+                backgroundSize: "300% 300%",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text"
+              }}
+            >
+              Every day, you face the reality of:
+            </motion.span>
+          </motion.h2>
         </div>
+
+        {/* Pain Points Grid */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="grid md:grid-cols-2 gap-8 mb-16"
+        >
+          {painPoints.map((point, index) => (
+            <PainPoint
+              key={index}
+              icon={point.icon}
+              title={point.title}
+              description={point.description}
+              delay={index * 0.15}
+            />
+          ))}
+        </motion.div>
+
+        {/* Closing empathy statement */}
+        <motion.div
+          initial={{ opacity: 0, y: 30, scale: 0.95 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.6, type: "spring" }}
+          viewport={{ once: true }}
+          className="text-center relative"
+        >
+          <div className="relative p-8 rounded-3xl bg-gradient-to-br from-white/80 via-[#F0FDFA]/90 to-[#ECFDF5]/80 backdrop-blur-sm border border-[#14B8A6]/20 shadow-xl">
+            <motion.div
+              animate={{ 
+                scale: [1, 1.02, 1],
+                opacity: [0.5, 0.8, 0.5]
+              }}
+              transition={{ 
+                duration: 3, 
+                repeat: Infinity, 
+                ease: "easeInOut" 
+              }}
+              className="absolute inset-0 bg-gradient-to-br from-[#14B8A6]/10 to-[#06B6D4]/5 rounded-3xl"
+            />
+            <p className="relative z-10 text-xl text-[#134E4A] font-primary leading-relaxed max-w-3xl mx-auto font-medium">
+              You deserve to feel optimally hydrated, recovered, and vibrant. You shouldn't have to choose between effective rehydration and natural, clean ingredients that align with your wellness values.
+            </p>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

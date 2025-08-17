@@ -1,217 +1,423 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import TextHover from './TextHover';
+
+// Solution Benefit Component
+const SolutionBenefit = ({ 
+  icon, 
+  title, 
+  description, 
+  delay = 0 
+}: { 
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  delay?: number;
+}) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30, rotateX: -15 }}
+      whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+      transition={{ duration: 0.8, delay, type: "spring", stiffness: 120 }}
+      viewport={{ once: true }}
+      whileHover={{ 
+        y: -10, 
+        scale: 1.03,
+        rotateY: 2,
+        boxShadow: "0 25px 50px rgba(20, 184, 166, 0.2)"
+      }}
+      className="flex items-center space-x-4 p-6 bg-gradient-to-br from-white via-[#F0FDFA] to-[#ECFDF5] rounded-2xl shadow-xl border border-[#14B8A6]/15 hover:border-[#14B8A6]/40 transition-all duration-500 group cursor-pointer relative overflow-hidden"
+    >
+      {/* Floating tropical background elements */}
+      <div className="absolute -top-6 -right-6 w-28 h-28 bg-gradient-to-br from-[#06B6D4]/12 to-[#10B981]/8 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
+      <div className="absolute -bottom-3 -left-3 w-20 h-20 bg-gradient-to-br from-[#14B8A6]/10 to-[#F59E0B]/8 rounded-full blur-lg group-hover:scale-125 transition-transform duration-500"></div>
+      
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8, rotate: -12 }}
+        whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+        transition={{ duration: 0.7, delay: delay + 0.2, type: "spring" }}
+        viewport={{ once: true }}
+        whileHover={{ 
+          scale: 1.2, 
+          rotate: 5,
+          boxShadow: "0 0 25px rgba(20, 184, 166, 0.5)"
+        }}
+        className="flex-shrink-0 w-12 h-12 rounded-lg bg-gradient-to-br from-[#14B8A6] via-[#06B6D4] to-[#10B981] flex items-center justify-center text-white shadow-lg relative z-10 group-hover:shadow-xl transition-all duration-400"
+      >
+        <motion.div
+          animate={{ 
+            scale: [1, 1.15],
+            rotate: [0, 5]
+          }}
+          transition={{ 
+            duration: 1.5, 
+            repeat: Infinity, 
+            repeatType: "reverse",
+            ease: "easeInOut" 
+          }}
+          className="text-white"
+        >
+          {icon}
+        </motion.div>
+        
+        {/* Pulsing glow effect */}
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-br from-[#14B8A6] to-[#06B6D4] rounded-xl opacity-0 group-hover:opacity-40 blur-lg"
+          animate={{ 
+            scale: [1, 1.3],
+            opacity: [0, 0.4]
+          }}
+          transition={{ 
+            duration: 1.4, 
+            repeat: Infinity, 
+            repeatType: "reverse",
+            ease: "easeInOut" 
+          }}
+        />
+        
+        {/* Sparkle effect */}
+        <motion.div
+          className="absolute top-1 right-1 w-2 h-2 bg-white rounded-full opacity-0 group-hover:opacity-100"
+          animate={{ 
+            scale: [0, 1],
+            rotate: [0, 180]
+          }}
+          transition={{ 
+            duration: 0.75, 
+            repeat: Infinity, 
+            repeatType: "reverse",
+            ease: "easeInOut",
+            delay: 0.5
+          }}
+        />
+      </motion.div>
+      
+      <div className="flex-1 relative z-10">
+        <motion.h3
+          initial={{ opacity: 0, x: -25 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.7, delay: delay + 0.3 }}
+          viewport={{ once: true }}
+          className="font-bold text-lg text-[#134E4A] mb-2 font-secondary group-hover:text-[#0F766E] transition-colors duration-300"
+        >
+          {title}
+        </motion.h3>
+        <motion.p
+          initial={{ opacity: 0, x: -25 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.7, delay: delay + 0.4 }}
+          viewport={{ once: true }}
+          className="text-[#134E4A]/85 leading-relaxed font-primary text-base group-hover:text-[#134E4A] transition-colors duration-300"
+        >
+          {description}
+        </motion.p>
+      </div>
+      
+      {/* Tropical wave animation */}
+      <motion.div
+        className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#14B8A6] via-[#06B6D4] to-[#10B981] opacity-25"
+        animate={{ 
+          scaleX: [0, 1],
+          originX: [0, 1]
+        }}
+        transition={{ 
+          duration: 1.75, 
+          repeat: Infinity, 
+          repeatType: "reverse",
+          ease: "easeInOut",
+          delay: delay * 0.5
+        }}
+      />
+    </motion.div>
+  );
+};
 
 const Solution = () => {
+  const solutionBenefits = [
+    {
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+        </svg>
+      ),
+      title: "Effortless Replenishment",
+      description: "Simply mix with water for instant, delicious coconut water packed with electrolytes. No more sugary drinks, no more artificial ingredients, just pure, natural goodness."
+    },
+    {
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+      ),
+      title: "Accelerated Recovery",
+      description: "Our unique blend helps your body bounce back faster after workouts, reducing muscle fatigue and supporting optimal performance. Feel strong, not drained, and ready for your next challenge."
+    },
+    {
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+        </svg>
+      ),
+      title: "Sustained Vitality",
+      description: "Experience a profound sense of well-being that comes from true hydration. Say goodbye to midday slumps and mental fogginess, and embrace sustained clarity and focus throughout your day."
+    },
+    {
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      ),
+      title: "On-the-Go Convenience",
+      description: "Designed for your busy lifestyle, Cocofuel comes in portable sachets, making it easy to stay hydrated wherever you are – at the gym, in the office, or on the trails."
+    }
+  ];
+
   return (
-    <section id="solution" className="relative py-20 px-4 bg-slate-900 overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Floating Brand Color Orbs - contained within viewport */}
-        <div className="absolute top-20 left-[5%] w-64 h-64 bg-gradient-to-r from-mint/30 to-sky/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-[5%] w-64 h-64 bg-gradient-to-r from-coral/20 to-amber/30 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-lavender/10 to-mint/20 rounded-full blur-3xl animate-pulse delay-2000"></div>
-      </div>
-
-      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden" style={{maxWidth: "100vw"}}>
-        {/* Section Header */}
-        <motion.div 
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true }}
-          className="text-center mb-16 lg:mb-24 w-full overflow-hidden"
-          style={{maxWidth: "100%", wordWrap: "break-word"}}
-        >
+    <>
+      <style jsx global>{`
+        * {
+          scrollbar-width: none !important;
+          -ms-overflow-style: none !important;
+        }
+        *::-webkit-scrollbar {
+          display: none !important;
+          width: 0 !important;
+        }
+      `}</style>
+      <section id="solution" className="py-20 px-4 relative overflow-hidden bg-gradient-to-br from-[#F0FDFA] via-[#ECFDF5] to-[#F0F9FF]">
+      {/* Tropical island-inspired background elements */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#A7F3D0]/15 via-transparent to-[#BFDBFE]/12"></div>
+      
+      {/* Floating organic shapes */}
+      <motion.div 
+        animate={{ 
+          y: [-25, 25],
+          rotate: [0, 8],
+          scale: [1, 1.2]
+        }}
+        transition={{ 
+          duration: 4.5, 
+          repeat: Infinity, 
+          repeatType: "reverse",
+          ease: "easeInOut" 
+        }}
+        className="absolute top-20 left-20 w-72 h-72 bg-gradient-to-br from-[#14B8A6]/12 to-[#06B6D4]/8 rounded-full blur-3xl"
+      />
+      
+      <motion.div 
+        animate={{ 
+          y: [30, -30],
+          rotate: [0, -5],
+          scale: [1.1, 0.9]
+        }}
+        transition={{ 
+          duration: 5.5, 
+          repeat: Infinity, 
+          repeatType: "reverse",
+          ease: "easeInOut",
+          delay: 3
+        }}
+        className="absolute bottom-20 right-20 w-80 h-80 bg-gradient-to-br from-[#10B981]/8 to-[#F59E0B]/5 rounded-full blur-3xl"
+      />
+      
+      <motion.div 
+        animate={{ 
+          x: [-40, 40],
+          y: [15, -15]
+        }}
+        transition={{ 
+          duration: 6.5, 
+          repeat: Infinity, 
+          repeatType: "reverse",
+          ease: "easeInOut",
+          delay: 6
+        }}
+        className="absolute top-1/3 right-1/3 w-60 h-60 bg-gradient-to-br from-[#0EA5E9]/6 to-[#84CC16]/4 rounded-full blur-2xl"
+      />
+      
+      {/* Subtle wave patterns */}
+      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-[#14B8A6]/3 to-transparent"></div>
+      
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header Section */}
+        <div className="text-center mb-16">
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            initial={{ opacity: 0, y: 30, scale: 0.95 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
             viewport={{ once: true }}
-            className="inline-block px-6 lg:px-8 py-3 lg:py-4 rounded-full bg-gradient-to-r from-mint/20 to-sky/20 border border-mint/30 backdrop-blur-sm mb-8"
+            className="text-xl text-[#134E4A] font-primary leading-relaxed max-w-4xl mx-auto mb-10 relative"
           >
-            <span className="font-secondary font-semibold text-mint text-sm lg:text-base tracking-wide uppercase">
-              Your Natural Solution
-            </span>
+            <p className="relative z-10">
+              Imagine a life where every sip revitalizes you, where your body feels optimally balanced, and your mind is crystal clear. This isn't a dream – it's the Cocofuel promise. We've meticulously crafted a premium coconut water powder enriched with essential electrolytes, designed to be your ultimate partner in rehydration and recovery.
+            </p>
+            {/* Subtle highlight effect */}
+            <motion.div
+              initial={{ scaleX: 0, opacity: 0 }}
+              whileInView={{ scaleX: 1, opacity: 0.08 }}
+              transition={{ duration: 1.5, delay: 0.6 }}
+              viewport={{ once: true }}
+              className="absolute inset-0 bg-gradient-to-r from-[#14B8A6] to-[#06B6D4] rounded-lg -z-10"
+            />
           </motion.div>
+          
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3, type: "spring" }}
+            viewport={{ once: true }}
+            className="text-3xl md:text-4xl font-bold text-[#0F766E] font-secondary mb-12 relative"
+          >
+            <motion.span
+              animate={{ 
+                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
+              }}
+              transition={{ 
+                duration: 5, 
+                repeat: Infinity, 
+                ease: "easeInOut" 
+              }}
+              style={{
+                background: "linear-gradient(45deg, #14B8A6, #06B6D4, #10B981, #14B8A6)",
+                backgroundSize: "300% 300%",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text"
+              }}
+            >
+              Cocofuel is your natural solution to:
+            </motion.span>
+          </motion.h2>
+        </div>
 
-          {/* Main Headline with TextHover */}
-          <TextHover
-            text="Cocofuel: Reclaim Your Vibrant Energy, Naturally."
-            className="font-secondary font-bold text-3xl sm:text-4xl lg:text-5xl xl:text-6xl text-white leading-tight max-w-4xl mx-auto mb-8"
-            hoverColors={["text-mint", "text-coral", "text-sky", "text-amber"]}
-            splitType="words"
-          />
-
-          {/* Subtext with TextHover */}
-          <TextHover
-            text="Imagine a life where fatigue is a distant memory, and every workout leaves you feeling strong, not drained. Cocofuel is more than just hydration; it's a catalyst for your personal evolution. Our pure, natural formula provides sustained energy and clarity, empowering you to thrive in every aspect of your life. It's time to banish the self-doubt and embrace the vibrant, unstoppable you."
-            className="font-primary text-base sm:text-lg lg:text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto px-4"
-            hoverColors={["text-white", "text-mint", "text-sky"]}
-            splitType="words"
-          />
+        {/* Solution Benefits - 2 per row, wider cards */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16"
+        >
+          {solutionBenefits.map((benefit, index) => (
+            <SolutionBenefit
+              key={index}
+              icon={benefit.icon}
+              title={benefit.title}
+              description={benefit.description}
+              delay={index * 0.1}
+            />
+          ))}
         </motion.div>
 
-        {/* Solution Features Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 mb-20">
-          {/* Natural Formula */}
+        {/* Athletic Product Showcase - Centered */}
+        <div className="flex justify-center">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            initial={{ opacity: 0, y: 40, rotateX: 15 }}
+            whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+            transition={{ duration: 1, delay: 0.4, type: "spring" }}
             viewport={{ once: true }}
-            className="group relative p-8 lg:p-10 rounded-3xl bg-gradient-to-br from-mint/10 to-mint/5 border border-mint/20 backdrop-blur-sm hover:from-mint/20 hover:to-mint/10 hover:border-mint/40 transition-all duration-500 hover:scale-105"
+            className="max-w-lg"
           >
-            <div className="relative z-10">
-              {/* Icon */}
-              <div className="w-16 h-16 lg:w-20 lg:h-20 rounded-2xl bg-gradient-to-br from-mint/30 to-mint/10 border border-mint/30 flex items-center justify-center mb-6 group-hover:scale-110 transition-all duration-500">
-                <svg className="w-8 h-8 lg:w-10 lg:h-10 text-mint" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                </svg>
+            <div className="relative">
+              {/* Floating elements around image */}
+              <motion.div
+                animate={{ 
+                  y: [-10, 10],
+                  rotate: [0, 5]
+                }}
+                transition={{ 
+                  duration: 2, 
+                  repeat: Infinity, 
+                  repeatType: "reverse",
+                  ease: "easeInOut" 
+                }}
+                className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-br from-[#14B8A6]/20 to-[#06B6D4]/20 rounded-full blur-sm"
+              />
+              
+              <motion.div
+                animate={{ 
+                  x: [10, -10],
+                  scale: [1, 1.1]
+                }}
+                transition={{ 
+                  duration: 2.5, 
+                  repeat: Infinity, 
+                  repeatType: "reverse",
+                  ease: "easeInOut",
+                  delay: 2
+                }}
+                className="absolute -bottom-6 -right-6 w-16 h-16 bg-gradient-to-br from-[#10B981]/15 to-[#F59E0B]/10 rounded-full blur-sm"
+              />
+              
+              <div className="w-full h-80 rounded-3xl shadow-2xl relative">
+                <img 
+                  src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                  alt="Athletes hydrating after workout session"
+                  className="w-full h-full object-cover rounded-3xl"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#14B8A6]/25 via-transparent to-[#06B6D4]/10 rounded-3xl"></div>
               </div>
-              
-              <h3 className="font-secondary font-bold text-xl lg:text-2xl text-mint mb-4">
-                100% Natural Formula
-              </h3>
-              
-              <p className="font-primary text-gray-400 leading-relaxed">
-                Pure coconut water enhanced with natural electrolytes. No artificial additives, just nature's perfect hydration solution.
-              </p>
-            </div>
-          </motion.div>
-
-          {/* Sustained Energy */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            viewport={{ once: true }}
-            className="group relative p-8 lg:p-10 rounded-3xl bg-gradient-to-br from-amber/10 to-amber/5 border border-amber/20 backdrop-blur-sm hover:from-amber/20 hover:to-amber/10 hover:border-amber/40 transition-all duration-500 hover:scale-105"
-          >
-            <div className="relative z-10">
-              {/* Icon */}
-              <div className="w-16 h-16 lg:w-20 lg:h-20 rounded-2xl bg-gradient-to-br from-amber/30 to-amber/10 border border-amber/30 flex items-center justify-center mb-6 group-hover:scale-110 transition-all duration-500">
-                <svg className="w-8 h-8 lg:w-10 lg:h-10 text-amber" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </div>
-              
-              <h3 className="font-secondary font-bold text-xl lg:text-2xl text-amber mb-4">
-                Sustained Energy
-              </h3>
-              
-              <p className="font-primary text-gray-400 leading-relaxed">
-                No crashes, no jitters. Our balanced formula provides steady, reliable energy that lasts throughout your entire day.
-              </p>
-            </div>
-          </motion.div>
-
-          {/* Mental Clarity */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            viewport={{ once: true }}
-            className="group relative p-8 lg:p-10 rounded-3xl bg-gradient-to-br from-sky/10 to-sky/5 border border-sky/20 backdrop-blur-sm hover:from-sky/20 hover:to-sky/10 hover:border-sky/40 transition-all duration-500 hover:scale-105"
-          >
-            <div className="relative z-10">
-              {/* Icon */}
-              <div className="w-16 h-16 lg:w-20 lg:h-20 rounded-2xl bg-gradient-to-br from-sky/30 to-sky/10 border border-sky/30 flex items-center justify-center mb-6 group-hover:scale-110 transition-all duration-500">
-                <svg className="w-8 h-8 lg:w-10 lg:h-10 text-sky" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                </svg>
-              </div>
-              
-              <h3 className="font-secondary font-bold text-xl lg:text-2xl text-sky mb-4">
-                Enhanced Clarity
-              </h3>
-              
-              <p className="font-primary text-gray-400 leading-relaxed">
-                Clear your mental fog and sharpen your focus. Feel confident and unstoppable in everything you pursue.
-              </p>
             </div>
           </motion.div>
         </div>
 
-        {/* Terminal Component for Scientific Facts */}
+        {/* Enhanced Closing statement */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          initial={{ opacity: 0, y: 30, scale: 0.95 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.8, type: "spring" }}
           viewport={{ once: true }}
-          className="max-w-4xl mx-auto mb-16"
+          className="text-center mt-20 relative"
         >
-          <div className="relative p-8 lg:p-12 rounded-3xl bg-gradient-to-br from-slate-800/80 to-slate-900/80 border border-slate-700/50 backdrop-blur-sm">
-            {/* Terminal Header */}
-            <div className="flex items-center gap-3 mb-8 pb-4 border-b border-slate-700/50">
-              <div className="flex gap-2">
-                <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                <div className="w-3 h-3 rounded-full bg-green-500"></div>
-              </div>
-              <span className="font-mono text-sm text-gray-400">~/cocofuel/science</span>
-            </div>
-
-            {/* Terminal Content */}
-            <div className="font-mono text-sm lg:text-base">
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                viewport={{ once: true }}
-                className="mb-4"
-              >
-                <span className="text-mint">$</span> <span className="text-white">analyze ingredients --natural</span>
-              </motion.div>
-              
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.8 }}
-                viewport={{ once: true }}
-                className="mb-6 text-gray-300 leading-relaxed"
-              >
-                <div className="mb-2">✓ <span className="text-mint">Coconut Water:</span> 600mg natural potassium</div>
-                <div className="mb-2">✓ <span className="text-amber">Natural Electrolytes:</span> Optimal hydration balance</div>
-                <div className="mb-2">✓ <span className="text-sky">Zero Artificial:</span> No synthetic additives</div>
-                <div className="mb-2">✓ <span className="text-coral">Bioavailability:</span> 94% absorption rate</div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 1.2 }}
-                viewport={{ once: true }}
-                className="text-mint"
-              >
-                Analysis complete. ✓ Cocofuel delivers superior hydration naturally.
-              </motion.div>
-            </div>
+          <div className="relative p-10 rounded-3xl bg-gradient-to-br from-white/90 via-[#F0FDFA]/95 to-[#ECFDF5]/85 backdrop-blur-sm border border-[#14B8A6]/25 shadow-2xl">
+            <motion.div
+              animate={{ 
+                scale: [1, 1.03, 1],
+                opacity: [0.3, 0.6, 0.3]
+              }}
+              transition={{ 
+                duration: 4, 
+                repeat: Infinity, 
+                ease: "easeInOut" 
+              }}
+              className="absolute inset-0 bg-gradient-to-br from-[#14B8A6]/8 to-[#06B6D4]/5 rounded-3xl"
+            />
+            <p className="relative z-10 text-xl text-[#134E4A] font-primary leading-relaxed max-w-3xl mx-auto font-medium">
+              Cocofuel isn't just a drink; it's a commitment to your best self. It's the clean, effective rehydration you've been searching for, allowing you to live a life of unwavering vitality and confidence.
+            </p>
+            
+            {/* Sparkle effects */}
+            <motion.div
+              animate={{ 
+                scale: [0, 1, 0],
+                rotate: [0, 180, 360]
+              }}
+              transition={{ 
+                duration: 2, 
+                repeat: Infinity, 
+                ease: "easeInOut",
+                delay: 1
+              }}
+              className="absolute top-6 left-8 w-2 h-2 bg-[#14B8A6] rounded-full"
+            />
+            <motion.div
+              animate={{ 
+                scale: [0, 1, 0],
+                rotate: [0, -180, -360]
+              }}
+              transition={{ 
+                duration: 2.5, 
+                repeat: Infinity, 
+                ease: "easeInOut",
+                delay: 2
+              }}
+              className="absolute bottom-8 right-10 w-1.5 h-1.5 bg-[#06B6D4] rounded-full"
+            />
           </div>
-        </motion.div>
-
-        {/* Call to Action */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          viewport={{ once: true }}
-          className="text-center"
-        >
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-3 px-8 lg:px-12 py-4 lg:py-6 bg-gradient-to-r from-mint to-sky text-white font-secondary font-bold text-lg lg:text-xl rounded-full hover:from-mint/90 hover:to-sky/90 transition-all duration-300 shadow-2xl hover:shadow-mint/25"
-          >
-            Experience the Transformation
-            <svg className="w-5 h-5 lg:w-6 lg:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
-          </motion.button>
         </motion.div>
       </div>
     </section>
+    </>
   );
 };
 

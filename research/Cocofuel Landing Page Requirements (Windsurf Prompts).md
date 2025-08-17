@@ -86,14 +86,16 @@ The Hero immediately positions Cocofuel as the rehydration solution to the ident
 
 **Copy:**
 
-Are you tired of feeling constantly parched, mentally foggy, and struggling to bounce back after a workout? Does the thought of another sugary sports drink or chalky electrolyte tablet make you cringe? You're not alone. In today's fast-paced world, maintaining optimal hydration and electrolyte balance is a constant battle, leading to:
+We know you're here because you're tired of feeling drained, dehydrated, and struggling with inadequate recovery. You've tried the sugary sports drinks, the artificial electrolyte tablets, and nothing truly delivers the deep rehydration your body craves. You're not alone in this frustration.
 
-*   **Midday Slumps:** That familiar feeling of hitting a wall, losing focus, and battling mental fatigue, often a direct result of insufficient hydration.
-*   **Slow Recovery:** Workouts that leave you feeling more depleted than energized, with muscle cramps and prolonged soreness hindering your progress.
-*   **Ineffective Solutions:** A market flooded with artificial, sugary, or inconvenient hydration options that fail to truly replenish your body or align with your health-conscious values.
-*   **Self-Doubt:** The quiet frustration of not living up to your full potential, both physically and mentally, because your body isn't getting the foundational support it needs.
+Every day, you face the reality of:
 
-These are the struggles Emily Johnson, our problem-aware avatar, faces daily. She yearns for a natural, effective solution that fits her active lifestyle and helps her reclaim her vibrant self.
+*   **Feeling Constantly Parched:** No matter how much water you drink, you never feel truly hydrated, leaving you depleted and struggling to maintain your energy throughout the day.
+*   **Poor Recovery After Workouts:** Your body takes too long to bounce back, with muscle fatigue and soreness that lingers, preventing you from performing at your best and enjoying the activities you love.
+*   **Mental Fogginess:** Dehydration affects your clarity and focus, making it harder to concentrate during important moments and leaving you feeling less sharp than you know you can be.
+*   **Ineffective Hydration Solutions:** The market is flooded with products that either taste terrible, contain artificial ingredients you don't want, or simply don't provide the comprehensive rehydration your active lifestyle demands.
+
+You deserve to feel optimally hydrated, recovered, and vibrant. You shouldn't have to choose between effective rehydration and natural, clean ingredients that align with your wellness values.
 
 **Visuals/Layout:**
 - **Imagery:** A relatable image depicting the struggle (e.g., a person looking tired at their desk, someone stretching a cramped muscle after a workout). The image should evoke empathy and highlight the problem without being overly negative. Ensure the image's color palette is bright and aligned with the light theme.
