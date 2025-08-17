@@ -3,16 +3,17 @@ import type { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import EmailProvider from "next-auth/providers/email";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
+import type { Adapter } from "next-auth/adapters";
+import { Resend } from "resend";
 import config from "@/config";
 import connectMongo from "./mongo";
+import { html, text } from "./email-template";
 
-interface NextAuthOptionsExtended extends NextAuthOptions {
-  adapter: any;
-}
-
-export const authOptions: NextAuthOptionsExtended = {
+export const authOptions: NextAuthOptions = {
   // Set any random key in .env.local
   secret: process.env.NEXTAUTH_SECRET,
+  // Add debug mode for development
+  debug: process.env.NODE_ENV === 'development',
   providers: [
     GoogleProvider({
       // Follow the "Login with Google" tutorial to get your credentials
@@ -34,23 +35,33 @@ export const authOptions: NextAuthOptionsExtended = {
     ...(connectMongo
       ? [
           EmailProvider({
-            server: {
-              host: "smtp.resend.com",
-              port: 465,
-              auth: {
-                user: "resend",
-                pass: process.env.RESEND_API_KEY,
-              },
-            },
             from: config.resend.fromNoReply,
+            // Custom email template with better styling
+            sendVerificationRequest: async ({ identifier, url }) => {
+              const { host } = new URL(url);
+              const resend = new Resend(process.env.RESEND_API_KEY);
+              
+              try {
+                await resend.emails.send({
+                  to: identifier,
+                  from: config.resend.fromNoReply,
+                  subject: `Sign in to Cocofuel`,
+                  text: text({ url, host }),
+                  html: html({ url, host, theme: {} }),
+                });
+              } catch (error) {
+                console.error('Failed to send verification email:', error);
+                throw new Error(`Email could not be sent to ${identifier}`);
+              }
+            },
           }),
         ]
-      : []),
+      : [])
   ],
   // New users will be saved in Database (MongoDB Atlas). Each user (model) has some fields like name, email, image, etc..
   // Requires a MongoDB database. Set MONOGODB_URI env variable.
   // Learn more about the model type: https://next-auth.js.org/v3/adapters/models
-  ...(connectMongo && { adapter: MongoDBAdapter(connectMongo) }),
+  ...(connectMongo && { adapter: MongoDBAdapter(connectMongo) as Adapter }),
 
   callbacks: {
     session: async ({ session, token }) => {
