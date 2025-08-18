@@ -1,10 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { useState, useEffect } from "react";
-import { Popover, Transition } from "@headlessui/react";
+import { useState, useEffect, useRef } from "react";
 import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
+import { createPortal } from "react-dom";
 import apiClient from "@/libs/api";
 
 // A button to show user some account actions
@@ -17,6 +17,10 @@ const ButtonAccount = () => {
   const { data: session, status } = useSession();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [buttonRect, setButtonRect] = useState<DOMRect | null>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const checkAdminStatus = async () => {
@@ -31,6 +35,27 @@ const ButtonAccount = () => {
     };
     checkAdminStatus();
   }, [session]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node) &&
+          buttonRef.current && !buttonRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      // Update button position when dropdown opens
+      if (buttonRef.current) {
+        setButtonRect(buttonRef.current.getBoundingClientRect());
+      }
+    }
+    
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen]);
 
   const handleSignOut = () => {
     signOut({ callbackUrl: "/" });
@@ -58,58 +83,64 @@ const ButtonAccount = () => {
   if (status === "unauthenticated") return null;
 
   return (
-    <Popover className="relative z-[9999]">
-      {({ open }) => (
-        <>
-          <Popover.Button className="btn">
-            {session?.user?.image ? (
-              <img
-                src={session?.user?.image}
-                alt={session?.user?.name || "Account"}
-                className="w-6 h-6 rounded-full shrink-0"
-                referrerPolicy="no-referrer"
-                width={24}
-                height={24}
-              />
-            ) : (
-              <span className="w-6 h-6 bg-base-300 flex justify-center items-center rounded-full shrink-0">
-                {session?.user?.name?.charAt(0) ||
-                  session?.user?.email?.charAt(0)}
-              </span>
-            )}
+    <div className="relative">
+      <button 
+        ref={buttonRef}
+        className="btn"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        {session?.user?.image ? (
+          <img
+            src={session?.user?.image}
+            alt={session?.user?.name || "Account"}
+            className="w-6 h-6 rounded-full shrink-0"
+            referrerPolicy="no-referrer"
+            width={24}
+            height={24}
+          />
+        ) : (
+          <span className="w-6 h-6 bg-base-300 flex justify-center items-center rounded-full shrink-0">
+            {session?.user?.name?.charAt(0) ||
+              session?.user?.email?.charAt(0)}
+          </span>
+        )}
 
-            {session?.user?.name || "Account"}
+        {session?.user?.name || "Account"}
 
-            {isLoading ? (
-              <span className="loading loading-spinner loading-xs"></span>
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                className={`w-5 h-5 duration-200 opacity-50 ${
-                  open ? "transform rotate-180 " : ""
-                }`}
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            )}
-          </Popover.Button>
-          <Transition
-            enter="transition duration-100 ease-out"
-            enterFrom="transform scale-95 opacity-0"
-            enterTo="transform scale-100 opacity-100"
-            leave="transition duration-75 ease-out"
-            leaveFrom="transform scale-100 opacity-100"
-            leaveTo="transform scale-95 opacity-0"
+        {isLoading ? (
+          <span className="loading loading-spinner loading-xs"></span>
+        ) : (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            className={`w-5 h-5 duration-200 opacity-50 ${
+              isOpen ? "transform rotate-180 " : ""
+            }`}
           >
-            <Popover.Panel className="fixed right-4 top-16 z-[9999] w-64 transform">
-              <div className="overflow-hidden rounded-xl shadow-xl ring-1 ring-base-content ring-opacity-5 bg-base-100 p-1">
-                <div className="space-y-0.5 text-sm">
+            <path
+              fillRule="evenodd"
+              d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+              clipRule="evenodd"
+            />
+          </svg>
+        )}
+      </button>
+      {isOpen && buttonRect && createPortal(
+        <div 
+          ref={dropdownRef}
+          className="w-64 transform transition-all duration-100"
+          style={{ 
+            position: 'fixed',
+            zIndex: 2147483647,
+            left: buttonRect.right - 256, // 256px = w-64
+            top: buttonRect.bottom + 8,
+            maxHeight: 'calc(100vh - ' + (buttonRect.bottom + 16) + 'px)',
+            overflowY: 'auto'
+          }}
+        >
+          <div className="overflow-visible rounded-xl shadow-xl ring-1 ring-base-content ring-opacity-5 bg-base-100 p-1">
+            <div className="space-y-0.5 text-sm">
                   <Link
                     href="/profile"
                     className="flex items-center gap-2 hover:bg-base-300 duration-200 py-1.5 px-4 w-full rounded-lg font-medium"
@@ -189,13 +220,12 @@ const ButtonAccount = () => {
                     </svg>
                     Logout
                   </button>
-                </div>
-              </div>
-            </Popover.Panel>
-          </Transition>
-        </>
+            </div>
+          </div>
+        </div>,
+        document.body
       )}
-    </Popover>
+    </div>
   );
 };
 
