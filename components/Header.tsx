@@ -40,7 +40,7 @@ const Header = () => {
   }, [searchParams]);
 
   return (
-    <header className="bg-base-200">
+    <header className="bg-gradient-to-r from-[#F0FDFA] via-[#ECFDF5] to-[#F0F9FF] shadow-sm border-b border-[#14B8A6]/10">
       <nav
         className="container flex items-center justify-between px-8 py-4 mx-auto"
         aria-label="Global"
@@ -60,7 +60,7 @@ const Header = () => {
               width={51}
               height={30}
             />
-            <span className="font-extrabold text-lg">{config.appName}</span>
+            <span className="font-extrabold text-lg text-[#134E4A]">{config.appName}</span>
           </Link>
         </div>
         {/* Burger button to open menu on mobile */}
@@ -77,7 +77,7 @@ const Header = () => {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-6 h-6 text-base-content"
+              className="w-6 h-6 text-[#134E4A]"
             >
               <path
                 strokeLinecap="round"
@@ -94,10 +94,11 @@ const Header = () => {
             <Link
               href={link.href}
               key={link.href}
-              className="link link-hover"
+              className="text-[#134E4A] font-medium hover:text-[#14B8A6] transition-colors duration-300 relative group"
               title={link.label}
             >
               {link.label}
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#14B8A6] to-[#06B6D4] transition-all duration-300 group-hover:w-full"></span>
             </Link>
           ))}
         </div>
@@ -109,7 +110,7 @@ const Header = () => {
       {/* Mobile menu, show/hide based on menu state. */}
       <div className={`relative z-50 ${isOpen ? "" : "hidden"}`}>
         <div
-          className={`fixed inset-y-0 right-0 z-10 w-full px-8 py-4 overflow-y-auto bg-base-200 sm:max-w-sm sm:ring-1 sm:ring-neutral/10 transform origin-right transition ease-in-out duration-300`}
+          className={`fixed inset-y-0 right-0 z-10 w-full px-8 py-4 overflow-y-auto bg-gradient-to-br from-[#F0FDFA] to-[#ECFDF5] sm:max-w-sm sm:ring-1 sm:ring-[#14B8A6]/20 transform origin-right transition ease-in-out duration-300`}
         >
           {/* Your logo/name on small screens */}
           <div className="flex items-center justify-between">
@@ -126,7 +127,7 @@ const Header = () => {
                 width={51}
                 height={30}
               />
-              <span className="font-extrabold text-lg">{config.appName}</span>
+              <span className="font-extrabold text-lg text-[#134E4A]">{config.appName}</span>
             </Link>
             <button
               type="button"
@@ -140,7 +141,7 @@ const Header = () => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="w-6 h-6"
+                className="w-6 h-6 text-[#134E4A]"
               >
                 <path
                   strokeLinecap="round"
@@ -159,10 +160,11 @@ const Header = () => {
                   <Link
                     href={link.href}
                     key={link.href}
-                    className="link link-hover"
+                    className="text-[#134E4A] font-medium hover:text-[#14B8A6] transition-colors duration-300 relative group"
                     title={link.label}
                   >
                     {link.label}
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#14B8A6] to-[#06B6D4] transition-all duration-300 group-hover:w-full"></span>
                   </Link>
                 ))}
               </div>

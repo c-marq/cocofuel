@@ -23,25 +23,46 @@ interface FAQItemProps {
 
 function FAQItem({ question, answer, isOpen, onToggle }: FAQItemProps) {
   return (
-    <div className="border-b border-slate-700">
-      <button
+    <motion.div 
+      className="bg-white/80 backdrop-blur-sm rounded-xl shadow-md border border-[#14B8A6]/20 mb-4 overflow-hidden"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+      whileHover={{ 
+        backgroundColor: "rgba(255, 255, 255, 0.9)",
+        borderColor: "rgba(20, 184, 166, 0.3)"
+      }}
+    >
+      <motion.button
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
           console.log('FAQ button clicked:', question);
           onToggle();
         }}
-        className="flex justify-between items-center w-full py-6 text-left focus:outline-none focus:ring-2 focus:ring-coral/50 rounded-lg px-2 hover:bg-slate-700/50 cursor-pointer transition-colors duration-300"
+        className="flex justify-between items-center w-full py-6 px-6 text-left focus:outline-none focus:ring-2 focus:ring-[#14B8A6]/50 cursor-pointer transition-all duration-300"
         style={{ zIndex: 10, position: 'relative' }}
+        whileHover={{ 
+          backgroundColor: "rgba(20, 184, 166, 0.05)",
+          x: 2
+        }}
+        transition={{ duration: 0.2 }}
       >
-        <h3 className="text-lg font-semibold text-white pr-4">{question}</h3>
+        <h3 className={`text-lg font-semibold pr-4 font-secondary transition-all duration-300 ${
+          isOpen 
+            ? 'bg-gradient-to-r from-[#14B8A6] to-[#06B6D4] bg-clip-text text-transparent' 
+            : 'text-[#263238]'
+        }`}>
+          {question}
+        </h3>
         <motion.div
           animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
         >
-          <ChevronDownIcon className="w-5 h-5 text-gray-400 flex-shrink-0" />
+          <ChevronDownIcon className="w-5 h-5 text-[#14B8A6] flex-shrink-0" />
         </motion.div>
-      </button>
+      </motion.button>
       
       <AnimatePresence>
         {isOpen && (
@@ -49,16 +70,19 @@ function FAQItem({ question, answer, isOpen, onToggle }: FAQItemProps) {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
+            transition={{ 
+              duration: 0.4, 
+              ease: [0.04, 0.62, 0.23, 0.98]
+            }}
             className="overflow-hidden"
           >
-            <div className="pb-6 pr-8 text-gray-300 leading-relaxed">
+            <div className="px-6 pb-6 text-[#263238]/80 leading-relaxed font-primary">
               {answer}
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 }
 
@@ -178,28 +202,24 @@ export default function FrequentlyAskedQuestions() {
 
   const faqs = [
     {
-      question: "Will I be charged after the free trial?",
-      answer: "No – you can continue on the free plan or choose to upgrade, no automatic charges. We believe in transparency and giving you control over your subscription."
+      question: "How is Cocofuel different from other hydration drinks?",
+      answer: "Cocofuel is made from 100% pure coconut water powder with no artificial additives, sweeteners, or preservatives. Unlike sports drinks that rely on synthetic electrolytes and sugars, Cocofuel provides naturally occurring potassium, magnesium, and calcium that your body recognizes and absorbs more efficiently. Our unique freeze-drying process preserves all the natural nutrients while creating a convenient powder form that's perfect for on-the-go hydration."
     },
     {
-      question: "Can I cancel anytime?",
-      answer: "Yes, you can cancel your subscription at any time, no questions asked. We make it easy to manage your account through your dashboard."
+      question: "What makes coconut water powder effective for rehydration?",
+      answer: "Coconut water is nature's sports drink, containing the perfect balance of electrolytes your body needs. It has more potassium than four bananas and contains natural cytokinins that support cellular hydration and recovery. Our powder form concentrates these benefits while making them shelf-stable and travel-friendly, so you can enjoy optimal hydration anywhere, anytime."
     },
     {
-      question: "Is Cocofuel suitable for all diets?",
-      answer: "Cocofuel is made with natural ingredients and is suitable for most dietary needs, including vegan and gluten-free diets. Please check our detailed ingredients list for full information."
+      question: "How quickly will I notice improved hydration?",
+      answer: "Most people notice improved energy and reduced fatigue within 15-30 minutes of consuming Cocofuel. For optimal hydration benefits, consistent daily use for 3-7 days will help your body maintain better fluid balance throughout the day. Athletes and active individuals often report faster recovery times and sustained energy during workouts when using Cocofuel regularly."
     },
     {
-      question: "How quickly will I see results?",
-      answer: "Most customers notice increased energy and improved hydration within the first few days. Sustained benefits typically develop over 1-2 weeks of consistent use."
+      question: "Is Cocofuel safe for daily use?",
+      answer: "Absolutely! Cocofuel is made from 100% natural coconut water with no artificial ingredients, making it safe for daily consumption. It's naturally low in sugar and contains no stimulants, artificial colors, or preservatives. However, if you have any medical conditions or take medications, we recommend consulting with your healthcare provider before adding any new supplement to your routine."
     },
     {
-      question: "What makes Cocofuel different from other energy drinks?",
-      answer: "Unlike artificial energy drinks that cause crashes, Cocofuel uses natural coconut water and organic ingredients to provide sustained energy without the jitters or afternoon slump."
-    },
-    {
-      question: "Is shipping free?",
-      answer: "Yes! We offer free shipping on all orders over $50. Orders under $50 have a flat $5.99 shipping fee. All orders are processed within 1-2 business days."
+      question: "What's the best time to use Cocofuel?",
+      answer: "Cocofuel is versatile and effective throughout the day. Many people enjoy it first thing in the morning to kickstart hydration, before or after workouts for optimal performance and recovery, or during the afternoon energy dip instead of reaching for caffeine. For best results, we recommend consuming Cocofuel when you need sustained energy and hydration - whether that's during travel, intense work sessions, or physical activities."
     }
   ];
 
@@ -209,8 +229,39 @@ export default function FrequentlyAskedQuestions() {
   };
 
   return (
-    <section id="faq" className="py-20 px-4 bg-slate-900">
-      <div className="max-w-4xl mx-auto">
+    <section id="faq" className="py-20 px-4 relative overflow-hidden bg-gradient-to-br from-[#F0FDFA] via-[#ECFDF5] to-[#F0F9FF]">
+      {/* Floating organic shapes */}
+      <motion.div 
+        animate={{ 
+          y: [-25, 25],
+          rotate: [0, 8],
+          scale: [1, 1.15]
+        }}
+        transition={{ 
+          duration: 4, 
+          repeat: Infinity, 
+          repeatType: "reverse",
+          ease: "easeInOut"
+        }}
+        className="absolute top-20 right-16 w-40 h-40 bg-gradient-to-br from-[#14B8A6]/15 to-[#06B6D4]/10 rounded-full blur-2xl"
+      />
+      <motion.div 
+        animate={{ 
+          y: [20, -20],
+          rotate: [0, -5],
+          scale: [1.3, 1]
+        }}
+        transition={{ 
+          duration: 5, 
+          repeat: Infinity, 
+          repeatType: "reverse",
+          ease: "easeInOut",
+          delay: 1
+        }}
+        className="absolute bottom-16 left-12 w-32 h-32 bg-gradient-to-br from-[#F59E0B]/20 to-[#10B981]/15 rounded-full blur-xl"
+      />
+
+      <div className="max-w-4xl mx-auto relative z-10">
         {/* Headline */}
         <motion.div 
           className="text-center mb-16"
@@ -219,79 +270,81 @@ export default function FrequentlyAskedQuestions() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 font-serif">
+          <h2 className="text-4xl md:text-5xl font-bold text-[#134E4A] mb-6 font-secondary">
             Your{" "}
-            <span className="bg-gradient-to-r from-sky to-mint bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#14B8A6] via-[#06B6D4] to-[#10B981] bg-clip-text text-transparent">
               Questions, Answered
             </span>
           </h2>
-          <p className="text-gray-300 text-lg max-w-2xl mx-auto">
+          <p className="text-[#134E4A]/80 text-lg max-w-2xl mx-auto font-primary">
             Everything you need to know about Cocofuel. Can't find what you're looking for? 
             Contact our friendly support team.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Traditional FAQ Accordion */}
+        <div className="max-w-3xl mx-auto">
+          {/* FAQ Accordion */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h3 className="text-2xl font-semibold text-white mb-8">Frequently Asked Questions</h3>
-            <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-6">
-              {faqs.map((faq, index) => (
+            {faqs.map((faq, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+              >
                 <FAQItem
-                  key={index}
                   question={faq.question}
                   answer={faq.answer}
                   isOpen={openItem === index}
                   onToggle={() => toggleItem(index)}
                 />
-              ))}
-            </div>
+              </motion.div>
+            ))}
           </motion.div>
-
-          {/* Interactive Terminal FAQ */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <h3 className="text-2xl font-semibold text-white mb-8">Interactive FAQ</h3>
-            <TerminalFAQ />
             
-            {/* Contact CTA */}
-            <motion.div 
-              className="mt-8 p-6 bg-gradient-to-r from-coral/10 to-sky/10 border border-coral/20 rounded-xl relative z-10"
-              whileHover={{ 
-                backgroundImage: "linear-gradient(to right, rgb(255 107 107 / 0.15), rgb(107 153 255 / 0.15))",
-                borderColor: "rgb(255 107 107 / 0.3)"
+          {/* Contact CTA */}
+          <motion.div 
+            className="mt-12 p-8 bg-white/60 backdrop-blur-sm border border-[#14B8A6]/30 rounded-2xl relative z-10 text-center"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            whileHover={{ 
+              backgroundColor: "rgba(255, 255, 255, 0.8)",
+              borderColor: "rgba(20, 184, 166, 0.4)",
+              scale: 1.02
+            }}
+          >
+            <h4 className="text-[#134E4A] font-bold text-xl mb-3 font-secondary">Still have questions?</h4>
+            <p className="text-[#134E4A]/70 text-lg mb-6 font-primary max-w-md mx-auto">
+              Our support team is here to help you make the best choice for your hydration needs.
+            </p>
+            <motion.button 
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('FAQ Contact Support button clicked - before state update');
+                setContactForm({
+                  isOpen: true,
+                  formType: 'support'
+                });
+                console.log('FAQ Contact Support button clicked - after state update');
               }}
-              transition={{ duration: 0.3 }}
+              className="bg-gradient-to-r from-[#F59E0B] to-[#F97316] hover:from-[#F59E0B]/90 hover:to-[#F97316]/90 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 cursor-pointer relative z-10 font-secondary shadow-lg"
+              whileHover={{ 
+                scale: 1.05,
+                boxShadow: "0 20px 40px rgba(245, 158, 11, 0.3)"
+              }}
+              whileTap={{ scale: 0.95 }}
             >
-              <h4 className="text-white font-semibold text-lg mb-2">Still have questions?</h4>
-              <p className="text-gray-300 text-sm mb-4">
-                Our support team is here to help you make the best choice for your hydration needs.
-              </p>
-              <button 
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  console.log('FAQ Contact Support button clicked - before state update');
-                  setContactForm({
-                    isOpen: true,
-                    formType: 'support'
-                  });
-                  console.log('FAQ Contact Support button clicked - after state update');
-                }}
-                className="bg-coral hover:bg-coral/80 text-white px-6 py-2 rounded-full font-semibold transition-colors duration-300 cursor-pointer relative z-10"
-              >
-                Contact Support
-              </button>
-            </motion.div>
+              Contact Support
+            </motion.button>
           </motion.div>
         </div>
       </div>

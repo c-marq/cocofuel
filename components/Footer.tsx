@@ -47,7 +47,7 @@ const FooterLink = ({
       {external ? (
         <a
           href={href}
-          className="relative block text-gray-400 hover:text-white transition-colors duration-300 group cursor-pointer"
+          className="relative block text-[#134E4A]/70 hover:text-[#134E4A] transition-colors duration-300 group cursor-pointer"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           target="_blank"
@@ -57,7 +57,7 @@ const FooterLink = ({
           
           {/* Animated underline */}
           <motion.div
-            className="absolute bottom-0 left-0 h-px bg-gradient-to-r from-coral to-amber"
+            className="absolute bottom-0 left-0 h-px bg-gradient-to-r from-[#14B8A6] to-[#06B6D4]"
             initial={{ width: 0 }}
             animate={{ width: isHovered ? "100%" : 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
@@ -65,7 +65,7 @@ const FooterLink = ({
           
           {/* Glow effect */}
           <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-coral/10 to-amber/10 blur-sm -z-10"
+            className="absolute inset-0 bg-gradient-to-r from-[#14B8A6]/10 to-[#06B6D4]/10 blur-sm -z-10"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ 
               opacity: isHovered ? 1 : 0,
@@ -78,7 +78,7 @@ const FooterLink = ({
         <Link
           href={href}
           onClick={handleClick}
-          className="relative block text-gray-400 hover:text-white transition-colors duration-300 group cursor-pointer"
+          className="relative block text-[#134E4A]/70 hover:text-[#134E4A] transition-colors duration-300 group cursor-pointer"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
@@ -86,7 +86,7 @@ const FooterLink = ({
           
           {/* Animated underline */}
           <motion.div
-            className="absolute bottom-0 left-0 h-px bg-gradient-to-r from-mint to-sky"
+            className="absolute bottom-0 left-0 h-px bg-gradient-to-r from-[#14B8A6] to-[#06B6D4]"
             initial={{ width: 0 }}
             animate={{ width: isHovered ? "100%" : 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
@@ -94,7 +94,7 @@ const FooterLink = ({
           
           {/* Glow effect */}
           <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-mint/10 to-sky/10 blur-sm -z-10"
+            className="absolute inset-0 bg-gradient-to-r from-[#14B8A6]/10 to-[#06B6D4]/10 blur-sm -z-10"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ 
               opacity: isHovered ? 1 : 0,
@@ -138,7 +138,7 @@ const ContactFormLink = ({
       
       {/* Animated underline */}
       <motion.div
-        className="absolute bottom-0 left-0 h-px bg-gradient-to-r from-coral to-amber"
+        className="absolute bottom-0 left-0 h-px bg-gradient-to-r from-[#14B8A6] to-[#06B6D4]"
         initial={{ width: 0 }}
         animate={{ width: isHovered ? "100%" : 0 }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
@@ -146,7 +146,7 @@ const ContactFormLink = ({
       
       {/* Glow effect */}
       <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-coral/10 to-amber/10 blur-sm -z-10"
+        className="absolute inset-0 bg-gradient-to-r from-[#14B8A6]/10 to-[#06B6D4]/10 blur-sm -z-10"
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ 
           opacity: isHovered ? 1 : 0,
@@ -192,16 +192,16 @@ const CocofuelFooter = () => {
         formType={contactForm.formType}
       />
       
-      <footer className="relative bg-slate-900 overflow-hidden">
-      {/* Brand Color Ambient Background Effects */}
+      <footer className="relative bg-gradient-to-br from-[#F0FDFA] via-[#ECFDF5] to-[#F0F9FF] overflow-hidden">
+      {/* Light tropical ambient background effects */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-10 left-[5%] w-64 h-64 bg-gradient-to-r from-coral/20 to-amber/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-10 right-[5%] w-64 h-64 bg-gradient-to-r from-mint/15 to-sky/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-lavender/10 to-coral/15 rounded-full blur-3xl animate-pulse delay-2000"></div>
+        <div className="absolute top-10 left-[5%] w-64 h-64 bg-gradient-to-r from-[#14B8A6]/10 to-[#06B6D4]/8 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-10 right-[5%] w-64 h-64 bg-gradient-to-r from-[#10B981]/8 to-[#0EA5E9]/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-[#06B6D4]/6 to-[#14B8A6]/8 rounded-full blur-3xl animate-pulse delay-2000"></div>
       </div>
 
       {/* Gradient Border Top */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-coral/50 to-transparent"></div>
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#14B8A6]/30 to-transparent"></div>
       
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-16">
         {/* Main Footer Grid */}
@@ -226,14 +226,14 @@ const CocofuelFooter = () => {
                 {/* Logo Glow Effect */}
                 <div className="absolute inset-0 bg-gradient-to-r from-coral/30 to-amber/30 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
               </div>
-              <span className="text-white font-bold text-2xl font-serif tracking-wide">
+              <span className="text-[#134E4A] font-bold text-2xl font-serif tracking-wide">
                 COCOFUEL
               </span>
             </Link>
 
             {/* Brand Description */}
             <div className="space-y-4">
-              <p className="text-gray-300 text-base leading-relaxed max-w-md">
+              <p className="text-[#134E4A]/80 text-base leading-relaxed max-w-md">
                 Reclaim your vibrant energy, naturally. Premium coconut water hydration that transforms your wellness journey from fatigue to unstoppable vitality.
               </p>
               
@@ -244,7 +244,7 @@ const CocofuelFooter = () => {
             </div>
 
             {/* Copyright */}
-            <p className="text-gray-500 text-sm">
+            <p className="text-[#134E4A]/60 text-sm">
               © {new Date().getFullYear()} Cocofuel. All rights reserved.
             </p>
           </div>
@@ -257,7 +257,7 @@ const CocofuelFooter = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-white font-secondary font-bold text-lg mb-6">
+            <h3 className="text-[#134E4A] font-secondary font-bold text-lg mb-6">
               <span className="bg-gradient-to-r from-coral to-amber bg-clip-text text-transparent">
                 Links
               </span>
@@ -284,8 +284,8 @@ const CocofuelFooter = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-white font-secondary font-bold text-lg mb-6">
-              <span className="bg-gradient-to-r from-mint to-sky bg-clip-text text-transparent">
+            <h3 className="text-[#134E4A] font-secondary font-bold text-lg mb-6">
+              <span className="bg-gradient-to-r from-coral to-amber bg-clip-text text-transparent">
                 Legal
               </span>
             </h3>
@@ -305,9 +305,9 @@ const CocofuelFooter = () => {
         </div>
 
         {/* Bottom Border */}
-        <div className="mt-12 pt-8 border-t border-slate-700/50">
+        <div className="mt-12 pt-8 border-t border-[#14B8A6]/20">
           <div className="text-center">
-            <p className="text-gray-400 text-sm">
+            <p className="text-[#134E4A]/60 text-sm">
               Built with 💚 for your wellness journey
             </p>
           </div>

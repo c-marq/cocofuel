@@ -42,17 +42,17 @@ function HamburgerIcon({ isOpen, className }: { isOpen: boolean; className: stri
       <motion.span
         animate={isOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
         transition={{ duration: 0.3 }}
-        className="w-6 h-0.5 bg-white mb-1.5 origin-center"
+        className="w-6 h-0.5 bg-[#134E4A] mb-1.5 origin-center"
       />
       <motion.span
         animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
         transition={{ duration: 0.3 }}
-        className="w-6 h-0.5 bg-white mb-1.5"
+        className="w-6 h-0.5 bg-[#134E4A] mb-1.5"
       />
       <motion.span
         animate={isOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
         transition={{ duration: 0.3 }}
-        className="w-6 h-0.5 bg-white origin-center"
+        className="w-6 h-0.5 bg-[#134E4A] origin-center"
       />
     </div>
   );
@@ -130,7 +130,7 @@ function AnimatedNavLink({ href, children, delay = 0, onClick }: {
         e.preventDefault();
         onClick(href);
       }}
-      className="relative text-gray-300 hover:text-white transition-colors duration-300 font-medium cursor-pointer group"
+      className="relative text-[#134E4A] hover:text-[#14B8A6] transition-colors duration-300 font-medium cursor-pointer group"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       initial={{ opacity: 0, y: -20 }}
@@ -141,7 +141,7 @@ function AnimatedNavLink({ href, children, delay = 0, onClick }: {
       
       {/* Animated underline */}
       <motion.div
-        className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-coral to-amber"
+        className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-[#14B8A6] to-[#06B6D4]"
         initial={{ width: 0 }}
         animate={{ width: isHovered ? "100%" : 0 }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
@@ -149,7 +149,7 @@ function AnimatedNavLink({ href, children, delay = 0, onClick }: {
       
       {/* Glow effect */}
       <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-coral/20 to-amber/20 blur-sm -z-10"
+        className="absolute inset-0 bg-gradient-to-r from-[#14B8A6]/20 to-[#06B6D4]/20 blur-sm -z-10"
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ 
           opacity: isHovered ? 1 : 0,
@@ -167,7 +167,7 @@ function ScrollProgress() {
   
   return (
     <motion.div
-      className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-coral via-amber to-mint z-[70]"
+      className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#14B8A6] via-[#06B6D4] to-[#10B981] z-[70]"
       style={{
         scaleX: scrollYProgress,
         transformOrigin: "0%"
@@ -212,7 +212,7 @@ export default function CocofuelHeader() {
         transition={{ duration: 0.6, delay: 0.2 }}
         className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-300 ${
           isScrolled 
-            ? 'bg-slate-900/95 backdrop-blur-sm border-b border-slate-700/50' 
+            ? 'bg-gradient-to-r from-[#F0FDFA]/95 via-[#ECFDF5]/95 to-[#F0F9FF]/95 backdrop-blur-sm border-b border-[#14B8A6]/20 shadow-sm' 
             : 'bg-transparent'
         }`}
       >
@@ -270,7 +270,7 @@ export default function CocofuelHeader() {
             <div className="lg:hidden">
               <motion.button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="p-2 rounded-md text-white hover:bg-slate-800 transition-colors duration-300"
+                className="p-2 rounded-md text-[#134E4A] hover:bg-[#14B8A6]/10 transition-colors duration-300"
                 whileTap={{ scale: 0.95 }}
               >
                 <HamburgerIcon isOpen={isMobileMenuOpen} className="w-6 h-6" />

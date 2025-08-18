@@ -36,33 +36,101 @@ function CountdownTimer({ targetDate }: { targetDate: string }) {
     <div className="flex justify-center gap-4 text-center">
       {Object.keys(timeLeft).length > 0 ? (
         <>
-          <div className="bg-coral/20 border border-coral/30 rounded-lg p-4 min-w-[80px]">
-            <div className="text-2xl md:text-3xl font-bold text-coral">
+          <motion.div 
+            className="bg-white/70 backdrop-blur-sm border border-[#14B8A6]/30 rounded-2xl p-4 min-w-[80px] shadow-lg"
+            animate={{ 
+              scale: [1, 1.02, 1],
+              boxShadow: [
+                "0 10px 25px rgba(20, 184, 166, 0.1)",
+                "0 15px 35px rgba(20, 184, 166, 0.2)",
+                "0 10px 25px rgba(20, 184, 166, 0.1)"
+              ]
+            }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            <motion.div 
+              className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-[#14B8A6] to-[#06B6D4] bg-clip-text text-transparent font-secondary"
+              key={timeLeft.days}
+              initial={{ rotateX: 0 }}
+              animate={{ rotateX: 360 }}
+              transition={{ duration: 0.6, type: "spring" }}
+            >
               {formatNumber(timeLeft.days || 0)}
-            </div>
-            <div className="text-xs text-gray-300 uppercase tracking-wide">Days</div>
-          </div>
-          <div className="bg-coral/20 border border-coral/30 rounded-lg p-4 min-w-[80px]">
-            <div className="text-2xl md:text-3xl font-bold text-coral">
+            </motion.div>
+            <div className="text-xs text-[#134E4A]/70 uppercase tracking-wide font-primary">Days</div>
+          </motion.div>
+          <motion.div 
+            className="bg-white/70 backdrop-blur-sm border border-[#F59E0B]/30 rounded-2xl p-4 min-w-[80px] shadow-lg"
+            animate={{ 
+              scale: [1, 1.02, 1],
+              boxShadow: [
+                "0 10px 25px rgba(245, 158, 11, 0.1)",
+                "0 15px 35px rgba(245, 158, 11, 0.2)",
+                "0 10px 25px rgba(245, 158, 11, 0.1)"
+              ]
+            }}
+            transition={{ duration: 2, repeat: Infinity, delay: 0.2 }}
+          >
+            <motion.div 
+              className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-[#F59E0B] to-[#D97706] bg-clip-text text-transparent font-secondary"
+              key={timeLeft.hours}
+              initial={{ rotateX: 0 }}
+              animate={{ rotateX: 360 }}
+              transition={{ duration: 0.6, type: "spring" }}
+            >
               {formatNumber(timeLeft.hours || 0)}
-            </div>
-            <div className="text-xs text-gray-300 uppercase tracking-wide">Hours</div>
-          </div>
-          <div className="bg-coral/20 border border-coral/30 rounded-lg p-4 min-w-[80px]">
-            <div className="text-2xl md:text-3xl font-bold text-coral">
+            </motion.div>
+            <div className="text-xs text-[#134E4A]/70 uppercase tracking-wide font-primary">Hours</div>
+          </motion.div>
+          <motion.div 
+            className="bg-white/70 backdrop-blur-sm border border-[#10B981]/30 rounded-2xl p-4 min-w-[80px] shadow-lg"
+            animate={{ 
+              scale: [1, 1.02, 1],
+              boxShadow: [
+                "0 10px 25px rgba(16, 185, 129, 0.1)",
+                "0 15px 35px rgba(16, 185, 129, 0.2)",
+                "0 10px 25px rgba(16, 185, 129, 0.1)"
+              ]
+            }}
+            transition={{ duration: 2, repeat: Infinity, delay: 0.4 }}
+          >
+            <motion.div 
+              className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-[#10B981] to-[#059669] bg-clip-text text-transparent font-secondary"
+              key={timeLeft.minutes}
+              initial={{ rotateX: 0 }}
+              animate={{ rotateX: 360 }}
+              transition={{ duration: 0.6, type: "spring" }}
+            >
               {formatNumber(timeLeft.minutes || 0)}
-            </div>
-            <div className="text-xs text-gray-300 uppercase tracking-wide">Min</div>
-          </div>
-          <div className="bg-coral/20 border border-coral/30 rounded-lg p-4 min-w-[80px]">
-            <div className="text-2xl md:text-3xl font-bold text-coral">
+            </motion.div>
+            <div className="text-xs text-[#134E4A]/70 uppercase tracking-wide font-primary">Min</div>
+          </motion.div>
+          <motion.div 
+            className="bg-white/70 backdrop-blur-sm border border-[#06B6D4]/30 rounded-2xl p-4 min-w-[80px] shadow-lg"
+            animate={{ 
+              scale: [1, 1.05, 1],
+              boxShadow: [
+                "0 10px 25px rgba(6, 182, 212, 0.15)",
+                "0 20px 40px rgba(6, 182, 212, 0.3)",
+                "0 10px 25px rgba(6, 182, 212, 0.15)"
+              ]
+            }}
+            transition={{ duration: 1, repeat: Infinity, delay: 0.6 }}
+          >
+            <motion.div 
+              className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-[#06B6D4] to-[#0891B2] bg-clip-text text-transparent font-secondary"
+              key={timeLeft.seconds}
+              initial={{ rotateX: 0 }}
+              animate={{ rotateX: 360 }}
+              transition={{ duration: 0.6, type: "spring" }}
+            >
               {formatNumber(timeLeft.seconds || 0)}
-            </div>
-            <div className="text-xs text-gray-300 uppercase tracking-wide">Sec</div>
-          </div>
+            </motion.div>
+            <div className="text-xs text-[#134E4A]/70 uppercase tracking-wide font-primary">Sec</div>
+          </motion.div>
         </>
       ) : (
-        <div className="text-xl font-bold text-coral">Time's up!</div>
+        <div className="text-xl font-bold bg-gradient-to-r from-[#F59E0B] to-[#D97706] bg-clip-text text-transparent">Time's up!</div>
       )}
     </div>
   );
@@ -124,11 +192,38 @@ export default function UrgencyOffer() {
       {/* Announcement Banner */}
       <AnnouncementBanner message="🔥 Get 20% off your first month! Limited time offer - ends soon!" />
       
-      <section className="py-16 px-4 bg-slate-900 relative overflow-hidden">
+      <section className="py-16 px-4 relative overflow-hidden bg-gradient-to-br from-[#F0FDFA] via-[#ECFDF5] to-[#F0F9FF]">
         {/* Background Effects */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-20 right-20 w-64 h-64 bg-coral/5 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-20 left-20 w-64 h-64 bg-amber/5 rounded-full blur-3xl animate-pulse" />
+          <motion.div 
+            animate={{ 
+              y: [-20, 20],
+              rotate: [0, 5],
+              scale: [1, 1.1]
+            }}
+            transition={{ 
+              duration: 4, 
+              repeat: Infinity, 
+              repeatType: "reverse",
+              ease: "easeInOut"
+            }}
+            className="absolute top-20 right-20 w-64 h-64 bg-gradient-to-br from-[#F59E0B]/20 to-[#D97706]/15 rounded-full blur-3xl"
+          />
+          <motion.div 
+            animate={{ 
+              y: [15, -15],
+              rotate: [0, -3],
+              scale: [1.2, 1]
+            }}
+            transition={{ 
+              duration: 5, 
+              repeat: Infinity, 
+              repeatType: "reverse",
+              ease: "easeInOut",
+              delay: 1.5
+            }}
+            className="absolute bottom-20 left-20 w-64 h-64 bg-gradient-to-br from-[#14B8A6]/25 to-[#06B6D4]/20 rounded-full blur-3xl"
+          />
         </div>
 
         <div className="max-w-4xl mx-auto text-center relative">
@@ -142,10 +237,10 @@ export default function UrgencyOffer() {
           >
             <SplitText 
               text="Don't Miss Out!"
-              className="text-3xl md:text-4xl font-bold text-coral mb-4"
+              className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-[#F59E0B] to-[#D97706] bg-clip-text text-transparent mb-4 font-secondary"
               delay={100}
             />
-            <h2 className="text-4xl md:text-5xl font-bold text-white font-serif">
+            <h2 className="text-4xl md:text-5xl font-bold text-[#134E4A] font-secondary">
               Limited-Time{" "}
               <span className="bg-gradient-to-r from-coral to-amber bg-clip-text text-transparent">
                 Special Offer
@@ -161,25 +256,46 @@ export default function UrgencyOffer() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mb-12"
           >
-            <p className="text-xl text-gray-300 mb-6 max-w-2xl mx-auto">
-              Get <span className="text-coral font-bold text-2xl">20% off</span> your first month when you sign up today! 
-              Join thousands who are transforming their energy with Cocofuel.
+            <p className="text-xl text-[#134E4A]/80 mb-6 max-w-2xl mx-auto font-primary">
+              Get <span className="bg-gradient-to-r from-[#F59E0B] to-[#D97706] bg-clip-text text-transparent font-bold text-2xl">20% off</span> your first order and start your rehydration journey today! 
+              Join thousands who are transforming their hydration with Cocofuel.
             </p>
             
             {/* Special Features */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-              <div className="bg-slate-800/50 border border-coral/20 rounded-lg p-4">
-                <div className="text-coral text-lg font-semibold">✨ FREE Shipping</div>
-                <div className="text-gray-300 text-sm">On your first order</div>
-              </div>
-              <div className="bg-slate-800/50 border border-amber/20 rounded-lg p-4">
-                <div className="text-amber text-lg font-semibold">🎁 Bonus Guide</div>
-                <div className="text-gray-300 text-sm">Energy optimization tips</div>
-              </div>
-              <div className="bg-slate-800/50 border border-mint/20 rounded-lg p-4">
-                <div className="text-mint text-lg font-semibold">💪 30-Day Guarantee</div>
-                <div className="text-gray-300 text-sm">Risk-free trial</div>
-              </div>
+              <motion.div 
+                className="bg-white/70 backdrop-blur-sm border border-[#14B8A6]/20 rounded-2xl p-6 shadow-lg"
+                whileHover={{ 
+                  y: -5,
+                  boxShadow: "0 20px 40px rgba(20, 184, 166, 0.15)"
+                }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              >
+                <div className="bg-gradient-to-r from-[#14B8A6] to-[#06B6D4] bg-clip-text text-transparent text-lg font-semibold font-secondary">✨ FREE Shipping</div>
+                <div className="text-[#134E4A]/70 text-sm font-primary">On your first order</div>
+              </motion.div>
+              <motion.div 
+                className="bg-white/70 backdrop-blur-sm border border-[#F59E0B]/20 rounded-2xl p-6 shadow-lg"
+                whileHover={{ 
+                  y: -5,
+                  boxShadow: "0 20px 40px rgba(245, 158, 11, 0.15)"
+                }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              >
+                <div className="bg-gradient-to-r from-[#F59E0B] to-[#D97706] bg-clip-text text-transparent text-lg font-semibold font-secondary">🎁 Bonus Guide</div>
+                <div className="text-[#134E4A]/70 text-sm font-primary">Energy optimization tips</div>
+              </motion.div>
+              <motion.div 
+                className="bg-white/70 backdrop-blur-sm border border-[#10B981]/20 rounded-2xl p-6 shadow-lg"
+                whileHover={{ 
+                  y: -5,
+                  boxShadow: "0 20px 40px rgba(16, 185, 129, 0.15)"
+                }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              >
+                <div className="bg-gradient-to-r from-[#10B981] to-[#059669] bg-clip-text text-transparent text-lg font-semibold font-secondary">💪 30-Day Guarantee</div>
+                <div className="text-[#134E4A]/70 text-sm font-primary">Risk-free trial</div>
+              </motion.div>
             </div>
           </motion.div>
 
@@ -191,7 +307,7 @@ export default function UrgencyOffer() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="mb-12"
           >
-            <div className="text-white text-lg mb-4 font-semibold">
+            <div className="text-[#134E4A] text-lg mb-4 font-semibold font-secondary">
               ⏰ Offer expires in:
             </div>
             <CountdownTimer targetDate={targetDate} />
@@ -205,19 +321,20 @@ export default function UrgencyOffer() {
             transition={{ duration: 0.6, delay: 0.6 }}
           >
             <motion.button
-              className="px-10 py-5 rounded-full bg-gradient-to-r from-coral to-amber text-white font-bold text-xl shadow-2xl border-2 border-coral/30"
+              className="px-10 py-5 rounded-full bg-gradient-to-r from-coral to-amber text-white font-bold text-xl shadow-2xl border-2 border-coral/30 font-secondary"
               whileHover={{ 
-                scale: 1.05, 
-                boxShadow: "0 20px 40px rgba(255, 107, 107, 0.4)",
-                borderColor: "rgba(255, 107, 107, 0.6)"
+                scale: 1.1, 
+                boxShadow: "0 25px 50px rgba(255, 138, 101, 0.5)",
+                borderColor: "rgba(255, 138, 101, 0.8)",
+                background: "linear-gradient(to right, #FF8A65, #FFC107)"
               }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 300, damping: 15 }}
             >
-              Claim Your 20% Discount Now! 🚀
+              Claim Your Discount
             </motion.button>
             
-            <p className="text-gray-400 text-sm mt-4">
+            <p className="text-[#134E4A]/70 text-sm mt-4 font-primary">
               No code required • Automatically applied at checkout
             </p>
           </motion.div>
